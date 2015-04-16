@@ -5,17 +5,9 @@
  * and open the template in the editor.
  */
 //Connecting and binding to LDAP information
-$host = 'ldaps://eds-test.ucsf.edu';
-$user = 'uid=People Directory Lookup,ou=applications,dc=ucsf,dc=edu';
-$password = 'xoI@9Yw7&Ew*fIQ9T';
-$port = 636;
 
 //Where and what you are searching information
-$searchDN = 'ou=people,dc=ucsf,dc=edu';
-$searchingFor = array("ucsfeduidnumber");
-$EmailAddress = (empty($_POST['EmailAddress']) ? NULL : $_POST['EmailAddress']);
 //$EmailAddress = $_POST['EmailAddress'];
-$filter = '(mail=' . $EmailAddress . ')';
 //(mail=stephen.cheung@ucsf.edu)
 
 //Connecting to LDAP or else die
