@@ -5,10 +5,6 @@
  * and open the template in the editor.
  */
 //Connecting and binding to LDAP information
-$host = 'ldaps://eds-test.ucsf.edu';
-$user = 'uid=People Directory Lookup,ou=applications,dc=ucsf,dc=edu';
-$password = 'xoI@9Yw7&Ew*fIQ9T';
-$port = 636;
 
 //Where and what you are searching information
 $searchDN = 'ou=people,dc=ucsf,dc=edu';
