@@ -1,0 +1,11 @@
+# Ignore paths that contain user-generated content.
+
+conf/
+
+# File patterns that are ignored
+*.swp
+*~
+.DS_Store
+.idea
+*.conf
+*.ini

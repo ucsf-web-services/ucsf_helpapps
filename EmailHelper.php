@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,8 +7,19 @@
  */
 //Connecting and binding to LDAP information
 
+$info = parse_ini_file("conf/config.ini");
+//print_r($info);
+$host = $info['LDAP host'];
+$user = $info['Bind DN'];
+$password = $info['Bind password'];
+$port = $info['Port'];
+
 //Where and what you are searching information
+$searchDN = $info['Search base'];
+$searchingFor = array($info['Attribute']);
+$EmailAddress = (empty($_POST['EmailAddress']) ? NULL : $_POST['EmailAddress']);
 //$EmailAddress = $_POST['EmailAddress'];
+$filter = '(mail=' . $EmailAddress . ')';
 //(mail=stephen.cheung@ucsf.edu)
 
 //Connecting to LDAP or else die
