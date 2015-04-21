@@ -2,6 +2,7 @@
 require_once 'vendor/autoload.php';
 
 
+
 $mailFrom = "DAISY@ucsf.edu";
 $mailTo = "Stephen.Cheung@ucsf.edu";
 //$mailHost = "CUDA.UCSF.EDU";
@@ -138,78 +139,11 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
     
    
 }
+
+include 'include/header.php';
 ?>
 
-<!doctype html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>help@UCSF: Campus HBS Access Form</title>
-        <link type="text/css" rel="stylesheet" href="css/main.css">
-        <style>
-            .wrapper{
-                background-color: #B3B9BF;
-            }
-            .white-container {
-                background-color: #FFFFFF;
-                display: block;
-                max-width: 1230px;
-                margin: 0 auto;
-                padding-left:15px;
-                font-family: 'HelveticaNeueLTStd',arial, sans-serif;
-                padding-right:15px;
-            }
-            .footer{
-                position: relative;
-                width:100%;
-                background-color: #000000;
-                color:#ffffff;
-                font-family: 'HelveticaNeueLTStd',arial, sans-serif;
-                clear:both;
-                max-width: 1230px;
-                margin: 0 auto;
-                padding-left:30px;
-            }
 
-            .top-header-container{
-                max-width:1230px;
-                margin: 0 auto;
-                font-family:HelveticaNeueLTStd-Roman, arial, san-serif;
-            }
-
-            .nav-bar .brand-logo {
-                box-shadow: none;
-            }
-
-            .nav-bar {
-                border-bottom: 1px #fff solid;
-            }
-
-        </style>
-    </head>
-
-    <body class="wrapper">
-        <!-- start banner -->
-        <div id="ucsf-banner-nav" class="no-logo">
-            <div class="top-header-container row">
-                <ul class="menu">
-                    <li class="first"><a href="http://www.ucsf.edu">University of California San Francisco</a></li>
-                    <li><a href="http://www.ucsfhealth.org/">UCSF Medical Center</a></li>
-                    <li><a href="http://www.ucsf.edu/search" title="">Search UCSF</a></li>
-                    <li><a href="http://www.ucsf.edu/about">About UCSF</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- end banner -->
-        <!--Site Header (subbrand and navigation)-->
-        <!-- Start Page Container -->
-        <div class="white-container">
-            <!-- Start Navigation -->
-            <header class="nav-bar">
-                <div class="brand-logo"><img src="imgs/UCSF_InfoTechnology_navy_RGB-2.png" height="58" width="227" border="0" hspace="14"></div>
-            </header>
-            <!--/Site Header (subbrand and navigation)-->
-            <!-- Content -->
             
             <?php if($validate === FALSE) { ?>
             
@@ -218,9 +152,9 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
 
                 <!-- ***************************************************************** -->
                 <noscript class="statusbar">
-                <br />
+                <p>&nbsp;</p>
                 <p><font color="red">
-                    Your browser does not support Help@UCSF Custom Applications <br />
+                    Your browser does not support Help@UCSF Custom Applications <p>&nbsp;</p>
                     please upgrade your browser or enable JavaScript support
                     </font></p>
                 </noscript>
@@ -228,6 +162,8 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
 
                 <script language="JavaScript" type="text/JavaScript">
                     <!--
+                    
+                    
                     function MM_findObj(n, d) { //v4.01
                     var p,i,x;  
                     
@@ -280,13 +216,13 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
                             <th colspan="4"><div align="left"> Access Administrator or Management Group Owner Information</div> </th>
                         </tr>
                         <tr>
-                            <td>Name<br>
+                            <td>Name<p>&nbsp;</p>
                                 <input type="text" name="adminName"></td>
-                            <td>Phone Number<br>
+                            <td>Phone Number<p>&nbsp;</p>
                                 <input type="text" name="adminPhone"></td>
-                            <td>Email Address<br>
+                            <td>Email Address<p>&nbsp;</p>
                                 <input type="text" name="adminEmail"></td>
-                            <td>Department Code<br>
+                            <td>Department Code<p>&nbsp;</p>
                                 <input type="text" name="depCode"></td>
                         </tr>
                         <tr>
@@ -304,18 +240,18 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
                         </tr>
                     </table>
 
-                    <br>
+                    <p>&nbsp;</p>
 
-                    <p>This form is used by the Access Administrator to request the following types of HBS updates:<br>
+                    <p>This form is used by the Access Administrator to request the following types of HBS updates:<p>&nbsp;</p>
                         <strong>
-                            A. Change the Employee's Approver Role<br>
-                            B. Change to Employee's HR Admin Role<br>
-                            C. Replace Management Group Owner<br>
-                            D. Change to Employee&rsquo;s Reports Role<br>
+                            A. Change the Employee's Approver Role<p>&nbsp;</p>
+                            B. Change to Employee's HR Admin Role<p>&nbsp;</p>
+                            C. Replace Management Group Owner<p>&nbsp;</p>
+                            D. Change to Employee&rsquo;s Reports Role<p>&nbsp;</p>
                         </strong>
                     </p>
 
-                    <br>
+                    <p>&nbsp;</p>
 
                     <table class="table--bordered">
                         <tr>
@@ -323,11 +259,11 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
                         </tr>
 
                         <tr>
-                            <td>Name<br>
+                            <td>Name<p>&nbsp;</p>
                                 <input type="text" name="employeeName"></td>
-                            <td>Employee ID #<br>
+                            <td>Employee ID #<p>&nbsp;</p>
                                 <input name="employeeID" type="text"></td>
-                            <td>Management Group #<br>
+                            <td>Management Group #<p>&nbsp;</p>
                                 <input name="employeeManagementGroup" type="text" size="30">
                             </td>
                         </tr>
@@ -335,7 +271,7 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
 
 
                         <tr>
-                            <td>Is this individual a UCSF Employee? <br></td>
+                            <td>Is this individual a UCSF Employee? <p>&nbsp;</p></td>
                             <td colspan="2">
 
                                 <input name="ucsfEmployee" type="radio" value="Yes">
@@ -427,7 +363,7 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
 
                     </table>
                     <p>Note: The employee information provided at the top of the form should be for the existing Management Group Owner. Provide the employee information for the new Management Group Owner in section C.</p>
-                    <table class="table--bordered"><br>
+                    <table class="table--bordered"><p>&nbsp;</p>
                         <tr>
                             <th colspan="2"><div align="left">D. Change to Employee's Reports Role</div></th>
                         </tr>
@@ -445,7 +381,7 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
                         </tr>
                     </table>
                     <p>Note: Employee will have access to run reports for the selected department and all &quot;child&quot; departments under it.</p>
-                    <table class="table--bordered"><br>
+                    <table class="table--bordered"><p>&nbsp;</p>
                         <tr>
                             <th>Comments</th>
                         </tr>
@@ -466,17 +402,7 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
 
 
                 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-                <script type="text/javascript">
-                    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-                    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-                </script>
-                <script type="text/javascript">
-                    try {
-                        var pageTracker = _gat._getTracker("UA-2208693-9");
-                        pageTracker._trackPageview();
-                    } catch (err) {
-                    }
-                </script>
+                
             <?php } else { 
                 echo "<pre>";
                 echo "<h2>Email Sent</h2>\n";
@@ -488,6 +414,8 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
                 echo "</pre>";
                
             }
+            
+            include 'include/footer.php';
             ?>
                 
                 
@@ -497,16 +425,4 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
                 
                 
                 
-                <!-- /Content-->
-                <!-- Start Footer -->
-                <div class="footer">
-                    <footer>
-                        &copy; 2015 University of California Regents, All Rights Reserved.
-                    </footer>
-                </div>
-                <!-- End Footer -->
-            </div>
-            <!-- end of container -->
-    </body>
-
-</html>
+                

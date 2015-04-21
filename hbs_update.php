@@ -169,77 +169,12 @@ if ($validate !== FALSE) {
         echo 'Mailer error: ' . $mail->ErrorInfo;
     }
 }
+
+include 'include/header.php'
 ?>
 
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>help@UCSF: Campus HBS Update Form</title>
-    <link type="text/css" rel="stylesheet" href="css/main.css">
-    <style>
-        .wrapper{
-            background-color: #B3B9BF;
-        }
-        .white-container {
-            background-color: #FFFFFF;
-            display: block;
-            max-width: 1230px;
-            margin: 0 auto;
-            padding-left:15px;
-            font-family: 'HelveticaNeueLTStd',arial, sans-serif;
-            padding-right:15px;
-        }
-        .footer{
-            position: relative;
-            width:100%;
-            background-color: #000000;
-            color:#ffffff;
-            font-family: 'HelveticaNeueLTStd',arial, sans-serif;
-            clear:both;
-            max-width: 1230px;
-            margin: 0 auto;
-            padding-left:30px;
-        }
 
-        .top-header-container{
-            max-width:1230px;
-            margin: 0 auto;
-            font-family:HelveticaNeueLTStd-Roman, arial, san-serif;
-        }
-
-        .nav-bar .brand-logo {
-            box-shadow: none;
-        }
-
-        .nav-bar {
-            border-bottom: 1px #fff solid;
-        }
-
-    </style>
-</head>
-
-<body  class="wrapper">
-    <!-- start banner -->
-    <div id="ucsf-banner-nav" class="no-logo">
-        <div class="top-header-container row">
-            <ul class="menu">
-                <li class="first"><a href="http://www.ucsf.edu">University of California San Francisco</a></li>
-                <li><a href="http://www.ucsfhealth.org/">UCSF Medical Center</a></li>
-                <li><a href="http://www.ucsf.edu/search" title="">Search UCSF</a></li>
-                <li><a href="http://www.ucsf.edu/about">About UCSF</a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- end banner -->
-    <!--Site Header (subbrand and navigation)-->
-    <!-- Start Page Container -->
-    <div class="white-container">
-        <!-- Start Navigation -->
-        <header class="nav-bar">
-            <div class="brand-logo"><img src="imgs/UCSF_InfoTechnology_navy_RGB-2.png" height="58" width="227" border="0" hspace="14"></div>
-        </header>
-        <!--/Site Header (subbrand and navigation)-->
-        <!-- Content -->
         <?php if($validate === FALSE) { ?>
         <div class="row row--demo">
             <h2>Campus HBS Update Form</h2>
@@ -354,16 +289,16 @@ if ($validate !== FALSE) {
                         <th colspan="3"><div align="left">HBS HR ADMIN INFORMATION</div></th>
                     </tr>
                     <tr>
-                        <td>Name<br>
+                        <td>Name<p>&nbsp;</p>
                             <input type="text" name="adminName"></td>
-                        <td>Phone #<br>
+                        <td>Phone #<p>&nbsp;</p>
                             <input type="text" name="adminPhone"></td>
-                        <td>Email Address<br>
+                        <td>Email Address<p>&nbsp;</p>
                             <input type="text" name="adminEmail">
                         </td>
                     </tr>
                 </table>
-                <br>
+                <p>&nbsp;</p>
 
                 <p>This form is used by the HBS HR Admin to request the following types of HBS updates for the specified employee:</p>
 
@@ -400,24 +335,24 @@ if ($validate !== FALSE) {
                 <!-- <p><em>Note: </em>Items G, H, and I only apply to Bi-Weekly employees.</p> -->
                 <p><em>Note: </em>Items G and H only apply to Bi-Weekly employees.</p>
                 <!-- Ticket # CRQ 4374 Ends -->
-                <br>
+                <p>&nbsp;</p>
 
                 <table class="table--bordered">
                     <tr>
                         <th colspan="3"><div align="left">EMPLOYEE INFORMATION</div></th>
                     </tr>
                     <tr>
-                        <td>Name<br>
+                        <td>Name<p>&nbsp;</p>
                             <input type="text" name="employeeName"></td>
-                        <td>Employee ID #<br>
+                        <td>Employee ID #<p>&nbsp;</p>
                             <input name="employeeID" type="text"></td>
-                        <td>Management Group #<br>
+                        <td>Management Group #<p>&nbsp;</p>
                             <input name="employeeManagementGroup" type="text" size="30">
                         </td>
                     </tr>
                     <tr>
                         <td>Is this individual a UCSF Employee?
-                            <br>
+                            <p>&nbsp;</p>
                         </td>
                         <td colspan="2">
                             <input name="ucsfEmployee" type="radio" value="UCSF Employee">
@@ -460,9 +395,9 @@ if ($validate !== FALSE) {
                     <tr valign="top">
                         <td>Leave Type </td>
                         <td>Type of Adjustment</td>
-                        <td>Effective Date<br>
+                        <td>Effective Date<p>&nbsp;</p>
                             (MM/DD/YYYY)</td>
-                        <td># of Hours<br>(# of hours to Add/Remove)</td>
+                        <td># of Hours<p>&nbsp;</p>(# of hours to Add/Remove)</td>
                         <td valign="top" nowrap="nowrap">Reason</td>
                         <td valign="middle" nowrap="nowrap"><p>&nbsp;
                             </p>
@@ -499,7 +434,7 @@ if ($validate !== FALSE) {
 
                             </select></td>
                         <td valign="middle" nowrap="nowrap"><input name="AdjVac" type="radio" value="Add Leave">
-                            Add<br>
+                            Add<p>&nbsp;</p>
                             <input name="AdjVac" type="radio" value="Remove Leave">
                             Remove</td>
                     </tr>
@@ -533,7 +468,7 @@ if ($validate !== FALSE) {
 
                             </select></td>
                         <td valign="middle" nowrap="nowrap"><input name="AdjSick" type="radio" value="Add Leave">
-                            Add<br>
+                            Add<p>&nbsp;</p>
                             <input name="AdjSick" type="radio" value="Remove Leave">
                             Remove</td>
                     </tr>
@@ -557,27 +492,27 @@ if ($validate !== FALSE) {
                             </select>
                         </td>
                         <td valign="middle" nowrap="nowrap"><input name="AdjCompTime" type="radio" value="Add Leave">
-                            Add<br>
+                            Add<p>&nbsp;</p>
                             <input name="AdjCompTime" type="radio" value="Remove Leave">
                             Remove
                         </td>
                     </tr>
                 </table>
-                <p><em>Note: </em>If selecting "Other" as the Reason, specify the reason in the comments section.</p><br>
+                <p><em>Note: </em>If selecting "Other" as the Reason, specify the reason in the comments section.</p><p>&nbsp;</p>
 
                 <table class="table--bordered">
                     <tr>
                         <th colspan="4"><div align="left">C. Adjust Months of Service</div></th>
                     </tr>
                     <tr valign="top">
-                        <td>Effective Date<br>
+                        <td>Effective Date<p>&nbsp;</p>
                             (MM/DD/YYYY)</td>
                         <td># of Months </td>
 
                         <td>Reason</td>
-                        <td rowspan="2"><br>
+                        <td rowspan="2"><p>&nbsp;</p>
                             <input name="monthsService" type="radio" value="Add Months Service">
-                            Add<br>
+                            Add<p>&nbsp;</p>
                             <input name="monthsService" type="radio" value="Remove Months Service">
                             Remove</td>
                     </tr>
@@ -600,7 +535,7 @@ if ($validate !== FALSE) {
                         <th colspan="2"><div align="left">D. End Grandfathered Status</div></th>
                     </tr>
                     <tr>
-                        <td>End Date<br>
+                        <td>End Date<p>&nbsp;</p>
                             (MM/DD/YYYY)</td>
 
                         <td><input name="dateEndGrandfathered" type="text" id="dateEndGrandfathered"></td>
@@ -613,11 +548,11 @@ if ($validate !== FALSE) {
                         <th colspan="3"><div align="left">E. Override Vacation Eligibility</div></th>
                     </tr>
                     <tr>
-                        <td>Date From<br>
+                        <td>Date From<p>&nbsp;</p>
                             (MM/DD/YYYY)</td>
-                        <td>Date To<br>
+                        <td>Date To<p>&nbsp;</p>
                             (MM/DD/YYYY)</td>
-                        <td>Eligibility Status<br>
+                        <td>Eligibility Status<p>&nbsp;</p>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -636,7 +571,7 @@ if ($validate !== FALSE) {
                     </tr>
                 </table>
 
-                <p><em>Note: </em>Dates must be month end dates.</p><br>
+                <p><em>Note: </em>Dates must be month end dates.</p><p>&nbsp;</p>
 
                 <table class="table--bordered">
                     <tr>
@@ -647,7 +582,7 @@ if ($validate !== FALSE) {
 
                         <td><input name="managementGroupNumber" type="text" id="managementGroupNumber"></td>
                     </tr>
-                </table><br>
+                </table><p>&nbsp;</p>
 
                 <!-- ################ -->
                 <table class="table--bordered">
@@ -665,7 +600,7 @@ if ($validate !== FALSE) {
                             </select>
                         </td>
                     </tr>
-                </table><br>
+                </table><p>&nbsp;</p>
                 <!-- ################ -->
                 <table class="table--bordered">
                     <tr>
@@ -684,7 +619,7 @@ if ($validate !== FALSE) {
                     </tr>
                 </table>
 
-                <br>
+                <p>&nbsp;</p>
 
                 <table class="table--bordered">
                     <tr>
@@ -714,16 +649,7 @@ if ($validate !== FALSE) {
                 echo "</pre>";
                
             }
+            
+            include 'include/footer.php';
             ?>
-            <!-- /Content-->
-            <!-- Start Footer -->
-            <div class="footer">
-                <footer>
-                    &copy; 2015 University of California Regents, All Rights Reserved.
-                </footer>
-            </div>
-            <!-- End Footer -->
-        </div>
-        <!-- end of container -->
-</body>
-</html>
+            
