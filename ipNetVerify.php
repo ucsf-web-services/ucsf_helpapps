@@ -6,12 +6,12 @@ $octet4;
 $ip = "test";
 $networkLocation = "not UCSF";
 
-
-
-if ($_SERVER['REMOTE_ADDR'] != null) {
-    $ip = $_SERVER['REMOTE_ADDR'];
+if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+} else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 } else {
-    $ip = "Unknown IP Address";
+    $ip = $_SERVER['REMOTE_ADDR'];
 }
 //$ip = '169.230.243.74';
 //$ip = '64.54.101.82';
@@ -100,57 +100,55 @@ include 'include/header.php'
 ?>
 
 
-            <div class="row row--demo">
-                <div class="columns three"> </div>
-                <div class="columns six">
+<div class="row row--demo">
+    <div class="columns three"> </div>
+    <div class="columns six">
 
-                    <h2>ITS Network Verification</h2>
-                    <h3>Test VPN</h3>
-                    <p>The box below tests whether the Virtual Private Network appears to be working at the time you visited (loaded) this web page.</p>
+        <h2>ITS Network Verification</h2>
+        <h3>Test VPN</h3>
+        <p>The box below tests whether the Virtual Private Network appears to be working at the time you visited (loaded) this web page.</p>
 
-<?php if ($release_level === "3") { ?>
+        <?php if ($release_level === "3") { ?>
 
-                        <p style="border:2px solid #933;padding:8px;background-color:#c0edb2">
+            <p style="border:2px solid #933;padding:8px;background-color:#c0edb2">
 
-                            <em>Yes</em>, you are on the UCSF computing network:
-                            <p>&nbsp;</p>
-                            You appear to be connecting from the IP address of: <strong><?php echo($ip); ?></strong>
-                            <p>&nbsp;</p>
-                            From this UCSF computing resources identify you as being connected from: <strong><?php echo($networkLocation); ?></strong>
-                            <p>&nbsp;</p>
-                            If you are having problems connecting to a site or network resource please contact your local CSC, 
-                            computer administrator or the ITS Help Desk and provide them the information found in this box.
+                <em>Yes</em>, you are on the UCSF computing network:
+            <p>&nbsp;</p>
+            You appear to be connecting from the IP address of: <strong><?php echo($ip); ?></strong>
+            <p>&nbsp;</p>
+            From this UCSF computing resources identify you as being connected from: <strong><?php echo($networkLocation); ?></strong>
+            <p>&nbsp;</p>
+            If you are having problems connecting to a site or network resource please contact your local CSC, 
+            computer administrator or the ITS Help Desk and provide them the information found in this box.
 
-                        </p>
+            </p>
 
-<?php } else { ?>
+        <?php } else { ?>
 
-                        <div style="border:2px solid #933;padding:8px;background-color:#f0d3d3">
+            <div style="border:2px solid #933;padding:8px;background-color:#f0d3d3">
 
-                            <em>No</em>, you are not on the UCSF computing network.<p>&nbsp;</p>
-                            You look to be connecting from the IP address of:  
+                <em>No</em>, you are not on the UCSF computing network.<p>&nbsp;</p>
+                You look to be connecting from the IP address of:  
 
-                            <strong><?php echo($ip); ?></strong><p>&nbsp;</p>
+                <strong><?php echo($ip); ?></strong><p>&nbsp;</p>
 
-                            This shows either that you are not on the UCSF network, you are not using one of the UCSF <abbr title="Virtual Private Network">VPN</abbr> services or your <abbr title="Virtual Private Network">VPN</abbr> client is not working correctly. Web sites and computing resources that require you to be on the UCSF network will not currently allow you access.<p>&nbsp;</p>
-                            If you are currently attempting to use the UCSF VPN system and are having problems connecting to a site or network resource please contact your local CSC, computer administrator or the ITS Help Desk and provide them the information found in this box. 
-                        </div>
-<?php } ?>
-                    <p> 
-                        <p>&nbsp;</p>
-                        <strong>Go To</strong>: <a href="http://vpn.ucsf.edu">Virtual Private Network (VPN)</a>
-                    </p>
-                    <p>&nbsp;</p>
+                This shows either that you are not on the UCSF network, you are not using one of the UCSF <abbr title="Virtual Private Network">VPN</abbr> services or your <abbr title="Virtual Private Network">VPN</abbr> client is not working correctly. Web sites and computing resources that require you to be on the UCSF network will not currently allow you access.<p>&nbsp;</p>
+                If you are currently attempting to use the UCSF VPN system and are having problems connecting to a site or network resource please contact your local CSC, computer administrator or the ITS Help Desk and provide them the information found in this box. 
+            </div>
+        <?php } ?>
+        <p> 
+        <p>&nbsp;</p>
+        <strong>Go To</strong>: <a href="http://vpn.ucsf.edu">Virtual Private Network (VPN)</a>
+        </p>
+        <p>&nbsp;</p>
 
-                    <h3>Verifying your Java Virtual Machine (JVM)</h3>
-                    <a href="https://www.java.com/en/download/installed.jsp">Verify Java Version</a>
-                    <p>&nbsp</p>
-                    <p>&nbsp</p>
-                    <p>&nbsp</p>
-
-                <?php 
-                
-                include 'include/footer.php'
-                
-                ?>
+        <h3>Verifying your Java Virtual Machine (JVM)</h3>
+        <a href="https://www.java.com/en/download/installed.jsp">Verify Java Version</a>
+        <p>&nbsp</p>
+        <p>&nbsp</p>
+        <p>&nbsp</p>
+    </div>
+    <?php
+    include 'include/footer.php'
+    ?>
 

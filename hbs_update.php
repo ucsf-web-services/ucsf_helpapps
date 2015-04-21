@@ -1,9 +1,10 @@
 <?php
 require_once 'vendor/autoload.php';
-$mailFrom = "DAISY@ucsf.edu";
-$mailTo = "Stephen.Cheung@ucsf.edu";
-//$mailHost = "CUDA.UCSF.EDU";
-$mailHost = "jingo.ucsf.edu";
+$config = parse_ini_file("conf/config.ini");
+$mailFrom = $config['Mail From'];
+$mailTo = $config['Mail To'];
+
+$mailHost = $config['Mail Host'];
 $validate = FALSE;
 
 $adminName = (empty($_POST['adminName']) ? NULL : $_POST['adminName']);
@@ -150,16 +151,17 @@ if ($validate !== FALSE) {
         $detail = $detail . "Change Management Group  \n";
         $detail = $detail . "Change Group to: " . $managementGroupNumber . "\n";
     }
-    
+
     $detail = $detail . "\n\nComments:\n";
     $detail = $detail . $comments . "\n";
- 
+
     $mail = new PHPMailer();
 
     $mail->IsSMTP();
     $mail->Host = $mailHost;
 
     $mail->From = $mailFrom;
+    $mail->FromName = 'NoReply';
     $mail->AddAddress($mailTo);
     $mail->Subject = $subject;
     $mail->Body = $detail;
@@ -175,481 +177,473 @@ include 'include/header.php'
 
 
 
-        <?php if($validate === FALSE) { ?>
-        <div class="row row--demo">
-            <h2>Campus HBS Update Form</h2>
+<?php if ($validate === FALSE) { ?>
+    <div class="row row--demo">
+        <h2>Campus HBS Update Form</h2>
 
-            <!-- ***************************************************************** -->
-            <noscript class="statusbar">
-            <br />
-            <p><font color="red">
-                Your browser does not support Help@UCSF Custom Applications <br />
-                please upgrade your browser or enable JavaScript support
-                </font></p>
-            </noscript>
-            <!-- ***************************************************************** -->
+        <!-- ***************************************************************** -->
+        <noscript class="statusbar">
+        <br />
+        <p><font color="red">
+            Your browser does not support Help@UCSF Custom Applications <br />
+            please upgrade your browser or enable JavaScript support
+            </font></p>
+        </noscript>
 
+        <script type="text/JavaScript">
 
-
-            <script type="text/JavaScript">
-                <!--
-                function MM_findObj(n, d) { //v4.01
-                var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-                d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-                if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-                for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-                if(!x && d.getElementById) x=d.getElementById(n); return x;
-                }
-
-                function MM_validateForm() { //v4.0
-                var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
-                for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=MM_findObj(args[i]);
-                if (val) { nm=val.name; if ((val=val.value)!="") {
-                if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
-                if (p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
-                } else if (test!='R') { num = parseFloat(val);
-                if (isNaN(val)) errors+='- '+nm+' must contain a number.\n';
-                if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
-                min=test.substring(8,p); max=test.substring(p+1);
-                if (num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
-                } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' is required.\n'; }
-                } if (errors) alert('The following error(s) occurred:\n'+errors);
-                document.MM_returnValue = (errors == '');
-                }
-                //-->
-            </script>
-
-            <script  type="text/JavaScript">
-
-                function testForObject(Id, Tag)
-                {
-                var o = document.getElementById(Id);
-                if (o){
-                if (Tag){
-                if (o.tagName.toLowerCase() == Tag.toLowerCase()){
-                return o;
-                }
-                } else {
-                return o;
-                }
-                }
-                return null;
-                }
-
-                //  ****************************  //
-                function traverseDom (root)
-                {
-                var s = '';
-
-                var c = root, n = null;
-                var it = 0;
-                do {
-                n = c.firstChild;
-                if (n == null){
-                // visit c
-                if (c.nodeType == 3)
-                s += c.nodeValue.replace(/\s/, "");
-                // done visit c
-
-                n = c.nextSibling;
-                }
-
-                if (n == null){
-                var tmp = c;
-                do {
-                n = tmp.parentNode;
-                if (n == root)
-                break;
-
-                // visit n
-                if (n.nodeType == 3)
-                s += n.nodeValue.replace(/\s/, "");
-                // done visit n
-
-                tmp = n;
-                n = n.nextSibling;
-                }while (n == null)
-                }
-                c = n;
-                }
-                while (c != root);
-                return s;
-                }
-            </script>
-
-
-
-
-
-
-            <form action="" method="post" name="form1" onSubmit="MM_validateForm('adminName', '', 'R', 'adminPhone', '', 'R', 'adminEmail', '', 'RisEmail', 'employeeName', '', 'R', 'employeeID', '', 'R', 'employeeManagementGroup', '', 'R');
-                    return document.MM_returnValue">
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="3"><div align="left">HBS HR ADMIN INFORMATION</div></th>
-                    </tr>
-                    <tr>
-                        <td>Name<p>&nbsp;</p>
-                            <input type="text" name="adminName"></td>
-                        <td>Phone #<p>&nbsp;</p>
-                            <input type="text" name="adminPhone"></td>
-                        <td>Email Address<p>&nbsp;</p>
-                            <input type="text" name="adminEmail">
-                        </td>
-                    </tr>
-                </table>
-                <p>&nbsp;</p>
-
-                <p>This form is used by the HBS HR Admin to request the following types of HBS updates for the specified employee:</p>
-
-                <table class="table--bordered">
-                    <tr>
-                        <td><input name="grace" type="checkbox" id="grace" value="true"></td>
-                        <td>A.&nbsp;Provide a Grace Period for Vacation Maximum/td>
-                        <td><input name="grandfathered" type="checkbox" id="grandfathered" value="true"></td>
-                        <td>D.&nbsp;End Grandfathered Status</td>
-                        <td><input name="unRestricted_Time" type="checkbox" id="unRestricted_Time" value="true"></td>
-                        <td>G.&nbsp;Assign/Remove Non-Exempt Unrestricted Timesheet</td>
-                    </tr>
-                    <tr>
-                        <td><input name="adjustLeave" type="checkbox" id="adjustLeave" value="true"></td>
-                        <td>B.&nbsp;Adjust Leave Balances</td>
-                        <td><input name="overrideVaction" type="checkbox" id="overrideVaction" value="true"></td>
-                        <td>E.&nbsp;Override Vacation Eligibility</td>
-                        <td><input name="autoPopulation_Time" type="checkbox" id="autoPopulation_Time" value="true"></td>
-                        <td>H.&nbsp;Assign/Remove Auto-Population of Timesheet</td>
-                    </tr>
-                    <tr>
-                        <td><input name="adjustMonths" type="checkbox" id="adjustMonths" value="true"></td>
-                        <td>C.&nbsp;Adjust Months of Service</td>
-                        <td><input name="changeManagement" type="checkbox" id="changeManagement" value="true"></td>
-                        <!-- Ticket # CRQ 4374 Begins -->
-                        <td>F.&nbsp;Change Management Group</td>
-                        <!-- Ticket # CRQ 4374 Begins -->
-                        <!--   <td><input name="requestNewSchedule" type="checkbox" id="requestNewSchedule" value="true"></td> -->
-                        <!--   <td><strong>I.&nbsp;Request a New Schedule</strong></td> -->
-                        <!-- Ticket # CRQ 4374 Ends -->
-                    </tr>
-                </table>
-                <!-- Ticket # CRQ 4374 Begins -->
-                <!-- <p><em>Note: </em>Items G, H, and I only apply to Bi-Weekly employees.</p> -->
-                <p><em>Note: </em>Items G and H only apply to Bi-Weekly employees.</p>
-                <!-- Ticket # CRQ 4374 Ends -->
-                <p>&nbsp;</p>
-
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="3"><div align="left">EMPLOYEE INFORMATION</div></th>
-                    </tr>
-                    <tr>
-                        <td>Name<p>&nbsp;</p>
-                            <input type="text" name="employeeName"></td>
-                        <td>Employee ID #<p>&nbsp;</p>
-                            <input name="employeeID" type="text"></td>
-                        <td>Management Group #<p>&nbsp;</p>
-                            <input name="employeeManagementGroup" type="text" size="30">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Is this individual a UCSF Employee?
-                            <p>&nbsp;</p>
-                        </td>
-                        <td colspan="2">
-                            <input name="ucsfEmployee" type="radio" value="UCSF Employee">
-                            Yes &nbsp;
-                            <input name="ucsfEmployee" type="radio" value="Not a UCSF Employee">
-                            No    </td>
-                    </tr>
-                </table>
-
-                <p>&nbsp;</p>
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="2"><div align="left">A. Provide a Grace Period for Vacation Maximum</div> </th>
-                    </tr>
-                    <tr>
-                        <td>Bargaining Unit</td>
-
-
-                        <td><select name="bargainingUnit" id="bargainingUnit">
-                                <option value=""> -select- </option>
-                                <option>99 (4 Months)</option>
-                                <option>CX (4 Months)</option>
-                                <option>HX (3 Months) </option>
-                                <option>LX (3 Months) </option>
-                                <option>NX (3 Months) </option>
-                                <option>PA (4 Months) </option>
-                                <option>RX (4 Months) </option>
-                                <option>SX (4 Months) </option>
-                                <option>TX (4 Months) </option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-                <p>&nbsp;</p>
-
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="6"><div align="left">B. Adjust Leave Balances</div></th>
-                    </tr>
-                    <tr valign="top">
-                        <td>Leave Type </td>
-                        <td>Type of Adjustment</td>
-                        <td>Effective Date<p>&nbsp;</p>
-                            (MM/DD/YYYY)</td>
-                        <td># of Hours<p>&nbsp;</p>(# of hours to Add/Remove)</td>
-                        <td valign="top" nowrap="nowrap">Reason</td>
-                        <td valign="middle" nowrap="nowrap"><p>&nbsp;
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Vacation Leave </td>
-                        <td><select name="AdjustTypeVac" id="AdjustTypeVac">
-                                <option value=""> -select- </option>
-                                <option>Starting Balance</option>
-                                <option>Current Balance</option>
-                            </select></td>
-                        <td><input name="AdjDateVac" type="text" id="AdjDateVac" size="12"></td>
-                        <td><input name="AdjHoursVac" type="text" id="AdjHoursVac" size="10"></td>
-                        <td><select name="AdjustReasonVac" id="AdjustReasonVac">
-                                <option value=""> -select- </option>
-                                <!-- Ticket # CRQ 4374 Begins 
-                                Coommented out the existing drop down
-                                <option>Rehire/Reinstatement</option>
-                                <option>WC/Disability</option>
-                                <option>Intercampus Transfer</option>
-                                <option>Curtailment</option>
-                                <option>Inaccurate Starting Balance</option>
-                                <option>Other</option> 
-                                Added new drop down -->
-                                <option>Inaccurate Starting Balance</option>
-                                <option>Catastrophic Leave</option>
-                                <option>Intercampus Transfer to UCSF</option>
-                                <option>Intercampus Transfer from UCSF</option>
-                                <option>Transfer with Med Center </option>
-                                <option>WC/Disability</option>
-                                <option>Other</option>
-                                <!-- Ticket # CRQ 4374 Begins -->
-
-                            </select></td>
-                        <td valign="middle" nowrap="nowrap"><input name="AdjVac" type="radio" value="Add Leave">
-                            Add<p>&nbsp;</p>
-                            <input name="AdjVac" type="radio" value="Remove Leave">
-                            Remove</td>
-                    </tr>
-                    <tr>
-                        <td>Sick Leave </td>
-                        <td><select name="AdjustTypeSick" id="AdjustTypeSick">
-                                <option value=""> -select- </option>
-                                <option>Starting Balance</option>
-                                <option>Current Balance</option>
-                            </select></td>
-                        <td><input name="AdjDateSick" type="text" id="AdjDateSick" size="12"></td>
-                        <td><input name="AdjHoursSick" type="text" id="AdjHoursSick" size="10"></td>
-                        <td valign="middle" nowrap="nowrap"><select name="AdjustReasonSick" id="AdjustReasonSick">
-                                <option value=""> -select- </option>
-                                <!-- Ticket # CRQ 4374 Begins 
-                                Coommented out the existing drop down
-                                <option>Rehire/Reinstatement</option>
-                                <option>WC/Disability</option>
-                                <option>Intercampus Transfer</option>
-                                <option>Curtailment</option>
-                                <option>Inaccurate Starting Balance</option>
-                                <option>Other</option> -->
-                                <option>Inaccurate Starting Balance</option>
-                                <option>Rehire/Reinstatement</option>
-                                <option>Intercampus Transfer to UCSF</option>
-                                <option>Intercampus Transfer from UCSF</option>
-                                <option>Transfer with Med Center</option>
-                                <option>WC/Disability</option>
-                                <option>Other</option>
-                                <!-- Ticket # CRQ 4374 Ends -->
-
-                            </select></td>
-                        <td valign="middle" nowrap="nowrap"><input name="AdjSick" type="radio" value="Add Leave">
-                            Add<p>&nbsp;</p>
-                            <input name="AdjSick" type="radio" value="Remove Leave">
-                            Remove</td>
-                    </tr>
-                    <tr>
-                        <td>Comp Time </td>
-                        <td><select name="AdjustCompTime" id="AdjustCompTime">
-                                <option value=""> -select- </option>
-                                <option>Starting Balance</option>
-                                <option>Current Balance</option>
-                            </select></td>
-                        <td><input name="AdjDateCompTime" type="text" id="AdjDateCompTime" size="12"></td>
-                        <td><input name="AdjHoursCompTime" type="text" id="AdjHoursCompTime" size="10"></td>
-                        <td valign="middle" nowrap="nowrap"><select name="AdjustReasonCompTime" id="AdjustReasonCompTime">
-                                <option value=""> -select- </option>
-                                <!-- Ticket # CRQ 4374 Begins 
-                                Coommented out Intercampus Transfer from drop down 
-                                <option>Intercampus Transfer</option> 
-                                Ticket # CRQ 4374 Ends -->
-                                <option>Inaccurate Starting Balance</option>
-                                <option>Other</option>
-                            </select>
-                        </td>
-                        <td valign="middle" nowrap="nowrap"><input name="AdjCompTime" type="radio" value="Add Leave">
-                            Add<p>&nbsp;</p>
-                            <input name="AdjCompTime" type="radio" value="Remove Leave">
-                            Remove
-                        </td>
-                    </tr>
-                </table>
-                <p><em>Note: </em>If selecting "Other" as the Reason, specify the reason in the comments section.</p><p>&nbsp;</p>
-
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="4"><div align="left">C. Adjust Months of Service</div></th>
-                    </tr>
-                    <tr valign="top">
-                        <td>Effective Date<p>&nbsp;</p>
-                            (MM/DD/YYYY)</td>
-                        <td># of Months </td>
-
-                        <td>Reason</td>
-                        <td rowspan="2"><p>&nbsp;</p>
-                            <input name="monthsService" type="radio" value="Add Months Service">
-                            Add<p>&nbsp;</p>
-                            <input name="monthsService" type="radio" value="Remove Months Service">
-                            Remove</td>
-                    </tr>
-                    <tr>
-                        <td><input name="monthsServiceEffectiveDate" type="text" id="monthsServiceEffectiveDate"></td>
-                        <td><input name="adjustNumberMonths" type="text" id="adjustNumberMonths"></td>
-                        <td><select name="MOSAdjustReason" id="MOSAdjustReason">
-                                <option value=""> -select- </option>
-                                <option>Prior Service Credit</option>
-                                <option>Intercampus Transfer</option>
-                                <option>Inaccurate Starting MOS</option>
-                                <option>Other</option>
-                            </select></td>
-                    </tr>
-                </table>
-                <p><em>Note: </em>If selecting "Other" as the Reason, specify the reason in the comments section.</p>
-
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="2"><div align="left">D. End Grandfathered Status</div></th>
-                    </tr>
-                    <tr>
-                        <td>End Date<p>&nbsp;</p>
-                            (MM/DD/YYYY)</td>
-
-                        <td><input name="dateEndGrandfathered" type="text" id="dateEndGrandfathered"></td>
-                    </tr>
-                </table>
-
-                <p>&nbsp;</p>
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="3"><div align="left">E. Override Vacation Eligibility</div></th>
-                    </tr>
-                    <tr>
-                        <td>Date From<p>&nbsp;</p>
-                            (MM/DD/YYYY)</td>
-                        <td>Date To<p>&nbsp;</p>
-                            (MM/DD/YYYY)</td>
-                        <td>Eligibility Status<p>&nbsp;</p>
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <td><input name="vacationOverrRideStart" type="text" id="vacationOverrRideStart"></td>
-                        <td><input name="vacationOverrRideEnd" type="text" id="vacationOverrRideEnd"></td>
-                        <td><select name="EligibilityStatus" id="EligibilityStatus">
-                                <option value=""> -select- </option>
-                                <option>Eligible</option>
-                                <option>Ineligible</option>
-                            </select></td>
-                    </tr>
-                    <tr valign="top">
-                        <td colspan="3"><strong><div align="left">Reason:</div>
-                                <textarea name="vacationOverrideReason" cols="80" rows="2" id="comments"></textarea>
-                            </strong></td>
-                    </tr>
-                </table>
-
-                <p><em>Note: </em>Dates must be month end dates.</p><p>&nbsp;</p>
-
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="2"><div align="left"> F. Change Management Group</div></th>
-                    </tr>
-                    <tr>
-                        <td>New Management Group # </td>
-
-                        <td><input name="managementGroupNumber" type="text" id="managementGroupNumber"></td>
-                    </tr>
-                </table><p>&nbsp;</p>
-
-                <!-- ################ -->
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="2"><div align="left">G. Assign/Remove Non-Exempt Unrestricted Timesheet</div> </th>
-                    </tr>
-                    <tr>
-                        <td>Request</td>
-
-                        <td>
-                            <select name="unResTimeRequest" id="unResTimeRequest">
-                                <option value=""> -select- </option>
-                                <option>Assign Non-Exempt Unrestricted Timesheet</option>
-                                <option>Remove Non-Exempt Unrestricted Timesheet</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table><p>&nbsp;</p>
-                <!-- ################ -->
-                <table class="table--bordered">
-                    <tr>
-                        <th colspan="2"><div align="left">H. Assign/Remove Auto-Population of Timesheet</div></th>
-                    </tr>
-                    <tr>
-                        <td>Request</td>
-
-                        <td>
-                            <select name="autoPopTimeRequest" id="autoPopTimeRequest">
-                                <option value=""> -select- </option>
-                                <option>Assign Auto-Population of Timesheet</option>
-                                <option>Remove Auto-Population of Timesheet</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-
-                <p>&nbsp;</p>
-
-                <table class="table--bordered">
-                    <tr>
-                        <td>Comments</td>
-                    </tr>
-                    <tr>
-                        <td><textarea name="comments" cols="80" rows="2" id="comments"></textarea></td>
-                    </tr>
-                </table>
-                <p>CERTIFICATION: Submission of this form serves as your electronic signature. It certifies that the request aligns with policy and has been appropriately approved by the employee in accordance with departmental procedures.</p>
-
-                
-                <input name="validate" type="hidden" id="validate" value="true">
-                <div align="center"><input class="btn btn--primary btn--fix" type="submit" name="Submit" value="Submit Form"> </div>
-                
-            </form>
-        </div>
-        
-        <?php } else { 
-                echo "<pre>";
-                echo "<h2>Email Sent</h2>\n";
-                echo "From: " . $mailFrom . "\n";
-                echo "To: " . $mailTo . "\n";
-                echo "Subject: " . $subject . "\n";
-                echo "_______________________ \n";
-                echo $detail;
-                echo "</pre>";
-               
+            function MM_findObj(n, d) { //v4.01
+            var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+            d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+            if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+            for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+            if(!x && d.getElementById) x=d.getElementById(n); return x;
             }
-            
-            include 'include/footer.php';
-            ?>
+
+            function MM_validateForm() { //v4.0
+            var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
+            for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=MM_findObj(args[i]);
+            if (val) { nm=val.name; if ((val=val.value)!="") {
+            if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
+            if (p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
+            } else if (test!='R') { num = parseFloat(val);
+            if (isNaN(val)) errors+='- '+nm+' must contain a number.\n';
+            if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
+            min=test.substring(8,p); max=test.substring(p+1);
+            if (num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
+            } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' is required.\n'; }
+            } if (errors) alert('The following error(s) occurred:\n'+errors);
+            document.MM_returnValue = (errors == '');
+            }
+            //
+        </script>
+
+        <script  type="text/JavaScript">
+            <!--
+            function testForObject(Id, Tag)
+            {
+            var o = document.getElementById(Id);
+            if (o){
+            if (Tag){
+            if (o.tagName.toLowerCase() == Tag.toLowerCase()){
+            return o;
+            }
+            } else {
+            return o;
+            }
+            }
+            return null;
+            }
+
+            //  ****************************  //
+            function traverseDom (root)
+            {
+            var s = '';
+
+            var c = root, n = null;
+            var it = 0;
+            do {
+            n = c.firstChild;
+            if (n == null){
+            // visit c
+            if (c.nodeType == 3)
+            s += c.nodeValue.replace(/\s/, "");
+            // done visit c
+
+            n = c.nextSibling;
+            }
+
+            if (n == null){
+            var tmp = c;
+            do {
+            n = tmp.parentNode;
+            if (n == root)
+            break;
+
+            // visit n
+            if (n.nodeType == 3)
+            s += n.nodeValue.replace(/\s/, "");
+            // done visit n
+
+            tmp = n;
+            n = n.nextSibling;
+            }while (n == null)
+            }
+            c = n;
+            }
+            while (c != root);
+            return s;
+            }-->
+        </script>
+
+        <form action="" method="post" name="form1" onSubmit="MM_validateForm('adminName', '', 'R', 'adminPhone', '', 'R', 'adminEmail', '', 'RisEmail', 'employeeName', '', 'R', 'employeeID', '', 'R', 'employeeManagementGroup', '', 'R');
+                    return document.MM_returnValue">
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="3"><div align="left">HBS HR ADMIN INFORMATION</div></th>
+                </tr>
+                <tr>
+                    <td>Name<p>&nbsp;</p>
+                        <input tabindex="1" type="text" name="adminName"></td>
+                    <td>Phone #<p>&nbsp;</p>
+                        <input tabindex="2" type="text" name="adminPhone"></td>
+                    <td>Email Address<p>&nbsp;</p>
+                        <input tabindex="3" type="text" name="adminEmail">
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+
+            <p>This form is used by the HBS HR Admin to request the following types of HBS updates for the specified employee:</p>
+
+            <table class="table--bordered">
+                <tr>
+                    <td><input name="grace" type="checkbox" id="grace" value="true"></td>
+                    <td>A.&nbsp;Provide a Grace Period for Vacation Maximum</td>
+                    <td><input name="grandfathered" type="checkbox" id="grandfathered" value="true"></td>
+                    <td>D.&nbsp;End Grandfathered Status</td>
+                    <td><input name="unRestricted_Time" type="checkbox" id="unRestricted_Time" value="true"></td>
+                    <td>G.&nbsp;Assign/Remove Non-Exempt Unrestricted Timesheet</td>
+                </tr>
+                <tr>
+                    <td><input name="adjustLeave" type="checkbox" id="adjustLeave" value="true"></td>
+                    <td>B.&nbsp;Adjust Leave Balances</td>
+                    <td><input name="overrideVaction" type="checkbox" id="overrideVaction" value="true"></td>
+                    <td>E.&nbsp;Override Vacation Eligibility</td>
+                    <td><input name="autoPopulation_Time" type="checkbox" id="autoPopulation_Time" value="true"></td>
+                    <td>H.&nbsp;Assign/Remove Auto-Population of Timesheet</td>
+                </tr>
+                <tr>
+                    <td><input name="adjustMonths" type="checkbox" id="adjustMonths" value="true"></td>
+                    <td>C.&nbsp;Adjust Months of Service</td>
+                    <td><input name="changeManagement" type="checkbox" id="changeManagement" value="true"></td>
+                    <!-- Ticket # CRQ 4374 Begins -->
+                    <td>F.&nbsp;Change Management Group</td>
+                    <!-- Ticket # CRQ 4374 Begins -->
+                    <!--   <td><input name="requestNewSchedule" type="checkbox" id="requestNewSchedule" value="true"></td> -->
+                    <!--   <td><strong>I.&nbsp;Request a New Schedule</strong></td> -->
+                    <!-- Ticket # CRQ 4374 Ends -->
+                </tr>
+            </table>
+            <!-- Ticket # CRQ 4374 Begins -->
+            <!-- <p><em>Note: </em>Items G, H, and I only apply to Bi-Weekly employees.</p> -->
+            <p><em>Note: </em>Items G and H only apply to Bi-Weekly employees.</p>
+            <!-- Ticket # CRQ 4374 Ends -->
+            <p>&nbsp;</p>
+
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="3"><div align="left">EMPLOYEE INFORMATION</div></th>
+                </tr>
+                <tr>
+                    <td>Name<p>&nbsp;</p>
+                        <input tabindex="4" type="text" name="employeeName"></td>
+                    <td>Employee ID #<p>&nbsp;</p>
+                        <input tabindex="5" name="employeeID" type="text"></td>
+                    <td>Management Group #<p>&nbsp;</p>
+                        <input tabindex="6" name="employeeManagementGroup" type="text" size="30">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Is this individual a UCSF Employee?
+                        <p>&nbsp;</p>
+                    </td>
+                    <td colspan="2">
+                        <input name="ucsfEmployee" type="radio" value="UCSF Employee">
+                        Yes &nbsp;
+                        <input name="ucsfEmployee" type="radio" value="Not a UCSF Employee">
+                        No    </td>
+                </tr>
+            </table>
+
+            <p>&nbsp;</p>
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="2"><div align="left">A. Provide a Grace Period for Vacation Maximum</div> </th>
+                </tr>
+                <tr>
+                    <td>Bargaining Unit</td>
+
+
+                    <td><select name="bargainingUnit" id="bargainingUnit">
+                            <option value=""> -select- </option>
+                            <option>99 (4 Months)</option>
+                            <option>CX (4 Months)</option>
+                            <option>HX (3 Months) </option>
+                            <option>LX (3 Months) </option>
+                            <option>NX (3 Months) </option>
+                            <option>PA (4 Months) </option>
+                            <option>RX (4 Months) </option>
+                            <option>SX (4 Months) </option>
+                            <option>TX (4 Months) </option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="6"><div align="left">B. Adjust Leave Balances</div></th>
+                </tr>
+                <tr valign="top">
+                    <td>Leave Type </td>
+                    <td>Type of Adjustment</td>
+                    <td>Effective Date<p>&nbsp;</p>
+                        (MM/DD/YYYY)</td>
+                    <td># of Hours<p>&nbsp;</p>(# of hours to Add/Remove)</td>
+                    <td valign="top" nowrap="nowrap">Reason</td>
+                    <td valign="middle" nowrap="nowrap"><p>&nbsp;
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Vacation Leave </td>
+                    <td><select name="AdjustTypeVac" id="AdjustTypeVac">
+                            <option value=""> -select- </option>
+                            <option>Starting Balance</option>
+                            <option>Current Balance</option>
+                        </select></td>
+                    <td><input name="AdjDateVac" type="text" id="AdjDateVac" size="12"></td>
+                    <td><input name="AdjHoursVac" type="text" id="AdjHoursVac" size="10"></td>
+                    <td><select name="AdjustReasonVac" id="AdjustReasonVac">
+                            <option value=""> -select- </option>
+                            <!-- Ticket # CRQ 4374 Begins 
+                            Coommented out the existing drop down
+                            <option>Rehire/Reinstatement</option>
+                            <option>WC/Disability</option>
+                            <option>Intercampus Transfer</option>
+                            <option>Curtailment</option>
+                            <option>Inaccurate Starting Balance</option>
+                            <option>Other</option> 
+                            Added new drop down -->
+                            <option>Inaccurate Starting Balance</option>
+                            <option>Catastrophic Leave</option>
+                            <option>Intercampus Transfer to UCSF</option>
+                            <option>Intercampus Transfer from UCSF</option>
+                            <option>Transfer with Med Center </option>
+                            <option>WC/Disability</option>
+                            <option>Other</option>
+                            <!-- Ticket # CRQ 4374 Begins -->
+
+                        </select></td>
+                    <td valign="middle" nowrap="nowrap"><input name="AdjVac" type="radio" value="Add Leave">
+                        Add<p>&nbsp;</p>
+                        <input name="AdjVac" type="radio" value="Remove Leave">
+                        Remove</td>
+                </tr>
+                <tr>
+                    <td>Sick Leave </td>
+                    <td><select name="AdjustTypeSick" id="AdjustTypeSick">
+                            <option value=""> -select- </option>
+                            <option>Starting Balance</option>
+                            <option>Current Balance</option>
+                        </select></td>
+                    <td><input name="AdjDateSick" type="text" id="AdjDateSick" size="12"></td>
+                    <td><input name="AdjHoursSick" type="text" id="AdjHoursSick" size="10"></td>
+                    <td valign="middle" nowrap="nowrap"><select name="AdjustReasonSick" id="AdjustReasonSick">
+                            <option value=""> -select- </option>
+                            <!-- Ticket # CRQ 4374 Begins 
+                            Coommented out the existing drop down
+                            <option>Rehire/Reinstatement</option>
+                            <option>WC/Disability</option>
+                            <option>Intercampus Transfer</option>
+                            <option>Curtailment</option>
+                            <option>Inaccurate Starting Balance</option>
+                            <option>Other</option> -->
+                            <option>Inaccurate Starting Balance</option>
+                            <option>Rehire/Reinstatement</option>
+                            <option>Intercampus Transfer to UCSF</option>
+                            <option>Intercampus Transfer from UCSF</option>
+                            <option>Transfer with Med Center</option>
+                            <option>WC/Disability</option>
+                            <option>Other</option>
+                            <!-- Ticket # CRQ 4374 Ends -->
+
+                        </select></td>
+                    <td valign="middle" nowrap="nowrap"><input name="AdjSick" type="radio" value="Add Leave">
+                        Add<p>&nbsp;</p>
+                        <input name="AdjSick" type="radio" value="Remove Leave">
+                        Remove</td>
+                </tr>
+                <tr>
+                    <td>Comp Time </td>
+                    <td><select name="AdjustCompTime" id="AdjustCompTime">
+                            <option value=""> -select- </option>
+                            <option>Starting Balance</option>
+                            <option>Current Balance</option>
+                        </select></td>
+                    <td><input name="AdjDateCompTime" type="text" id="AdjDateCompTime" size="12"></td>
+                    <td><input name="AdjHoursCompTime" type="text" id="AdjHoursCompTime" size="10"></td>
+                    <td valign="middle" nowrap="nowrap"><select name="AdjustReasonCompTime" id="AdjustReasonCompTime">
+                            <option value=""> -select- </option>
+                            <!-- Ticket # CRQ 4374 Begins 
+                            Coommented out Intercampus Transfer from drop down 
+                            <option>Intercampus Transfer</option> 
+                            Ticket # CRQ 4374 Ends -->
+                            <option>Inaccurate Starting Balance</option>
+                            <option>Other</option>
+                        </select>
+                    </td>
+                    <td valign="middle" nowrap="nowrap"><input name="AdjCompTime" type="radio" value="Add Leave">
+                        Add<p>&nbsp;</p>
+                        <input name="AdjCompTime" type="radio" value="Remove Leave">
+                        Remove
+                    </td>
+                </tr>
+            </table>
+            <p><em>Note: </em>If selecting "Other" as the Reason, specify the reason in the comments section.</p><p>&nbsp;</p>
+
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="4"><div align="left">C. Adjust Months of Service</div></th>
+                </tr>
+                <tr valign="top">
+                    <td>Effective Date<p>&nbsp;</p>
+                        (MM/DD/YYYY)</td>
+                    <td># of Months </td>
+
+                    <td>Reason</td>
+                    <td rowspan="2"><p>&nbsp;</p>
+                        <input name="monthsService" type="radio" value="Add Months Service">
+                        Add<p>&nbsp;</p>
+                        <input name="monthsService" type="radio" value="Remove Months Service">
+                        Remove</td>
+                </tr>
+                <tr>
+                    <td><input name="monthsServiceEffectiveDate" type="text" id="monthsServiceEffectiveDate"></td>
+                    <td><input name="adjustNumberMonths" type="text" id="adjustNumberMonths"></td>
+                    <td><select name="MOSAdjustReason" id="MOSAdjustReason">
+                            <option value=""> -select- </option>
+                            <option>Prior Service Credit</option>
+                            <option>Intercampus Transfer</option>
+                            <option>Inaccurate Starting MOS</option>
+                            <option>Other</option>
+                        </select></td>
+                </tr>
+            </table>
+            <p><em>Note: </em>If selecting "Other" as the Reason, specify the reason in the comments section.</p>
+
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="2"><div align="left">D. End Grandfathered Status</div></th>
+                </tr>
+                <tr>
+                    <td>End Date<p>&nbsp;</p>
+                        (MM/DD/YYYY)</td>
+
+                    <td><input name="dateEndGrandfathered" type="text" id="dateEndGrandfathered"></td>
+                </tr>
+            </table>
+
+            <p>&nbsp;</p>
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="3"><div align="left">E. Override Vacation Eligibility</div></th>
+                </tr>
+                <tr>
+                    <td>Date From<p>&nbsp;</p>
+                        (MM/DD/YYYY)</td>
+                    <td>Date To<p>&nbsp;</p>
+                        (MM/DD/YYYY)</td>
+                    <td>Eligibility Status<p>&nbsp;</p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td><input name="vacationOverrRideStart" type="text" id="vacationOverrRideStart"></td>
+                    <td><input name="vacationOverrRideEnd" type="text" id="vacationOverrRideEnd"></td>
+                    <td><select name="EligibilityStatus" id="EligibilityStatus">
+                            <option value=""> -select- </option>
+                            <option>Eligible</option>
+                            <option>Ineligible</option>
+                        </select></td>
+                </tr>
+                <tr valign="top">
+                    <td colspan="3"><strong><div align="left">Reason:</div>
+                            <textarea name="vacationOverrideReason" cols="80" rows="2" id="comments"></textarea>
+                        </strong></td>
+                </tr>
+            </table>
+
+            <p><em>Note: </em>Dates must be month end dates.</p><p>&nbsp;</p>
+
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="2"><div align="left"> F. Change Management Group</div></th>
+                </tr>
+                <tr>
+                    <td>New Management Group # </td>
+
+                    <td><input name="managementGroupNumber" type="text" id="managementGroupNumber"></td>
+                </tr>
+            </table><p>&nbsp;</p>
+
+            <!-- ################ -->
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="2"><div align="left">G. Assign/Remove Non-Exempt Unrestricted Timesheet</div> </th>
+                </tr>
+                <tr>
+                    <td>Request</td>
+
+                    <td>
+                        <select name="unResTimeRequest" id="unResTimeRequest">
+                            <option value=""> -select- </option>
+                            <option>Assign Non-Exempt Unrestricted Timesheet</option>
+                            <option>Remove Non-Exempt Unrestricted Timesheet</option>
+                        </select>
+                    </td>
+                </tr>
+            </table><p>&nbsp;</p>
+            <!-- ################ -->
+            <table class="table--bordered">
+                <tr>
+                    <th colspan="2"><div align="left">H. Assign/Remove Auto-Population of Timesheet</div></th>
+                </tr>
+                <tr>
+                    <td>Request</td>
+
+                    <td>
+                        <select name="autoPopTimeRequest" id="autoPopTimeRequest">
+                            <option value=""> -select- </option>
+                            <option>Assign Auto-Population of Timesheet</option>
+                            <option>Remove Auto-Population of Timesheet</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+
+            <p>&nbsp;</p>
+
+            <table class="table--bordered">
+                <tr>
+                    <td>Comments</td>
+                </tr>
+                <tr>
+                    <td><textarea name="comments" cols="80" rows="2" id="comments"></textarea></td>
+                </tr>
+            </table>
+            <p>CERTIFICATION: Submission of this form serves as your electronic signature. It certifies that the request aligns with policy and has been appropriately approved by the employee in accordance with departmental procedures.</p>
+
+
+            <input name="validate" type="hidden" id="validate" value="true">
+            <div align="center"><input class="btn btn--primary btn--fix" type="submit" name="Submit" value="Submit Form"> </div>
+
+        </form>
+    </div>
+
+    <?php
+} else {
+    echo "<pre>";
+    echo "<h2>Email Sent</h2>\n";
+    echo "From: " . $mailFrom . "\n";
+    echo "To: " . $mailTo . "\n";
+    echo "Subject: " . $subject . "\n";
+    echo "_______________________ \n";
+    echo $detail;
+    echo "</pre>";
+}
+
+include 'include/footer.php';
+?>
             
