@@ -136,14 +136,6 @@ include 'include/header.php'
                 If you are currently attempting to use the UCSF VPN system and are having problems connecting to a site or network resource please contact your local CSC, computer administrator or the ITS Help Desk and provide them the information found in this box. 
             </div>
         <?php } ?>
-        <p> 
-        <p>&nbsp;</p>
-        <strong>Go To</strong>: <a href="http://vpn.ucsf.edu">Virtual Private Network (VPN)</a>
-        </p>
-        <p>&nbsp;</p>
-
-        <h3>Verifying your Java Virtual Machine (JVM)</h3>
-        <a href="https://www.java.com/en/download/installed.jsp">Verify Java Version</a>
         <p>&nbsp</p>
         <p>&nbsp</p>
         <p>&nbsp</p>

@@ -143,7 +143,6 @@ include 'include/header.php';
         please upgrade your browser or enable JavaScript support
         </font></p>
     </noscript>
-    <!-- ***************************************************************** -->
 
     <script language="JavaScript" type="text/JavaScript">
         function MM_findObj(n, d) { //v4.01
@@ -188,178 +187,179 @@ include 'include/header.php';
         }
     </script>
 
-    <p><strong>This form can only be submitted by the Management Group Owner OR the Access Administrator. Fill in the appropriate section based on <em>your role</em>.</strong> </p>
     <form action="" method="post" name="form1" onsubmit="MM_validateForm('adminName', '', 'R', 'ucsfEmployee', '', 'R', 'depCode', '', 'R', 'adminPhone', '', 'R', 'adminEmail', '', 'RisEmail', 'employeeName', '', 'R', 'employeeID', '', 'R', 'employeeManagementGroup', '', 'R');
-                            return document.MM_returnValue">
-        <table class="table--bordered">
-            <tr>
-                <th colspan="4"><div align="left"> Access Administrator or Management Group Owner Information</div> </th>
-            </tr>
-            <tr>
-                <td>Name<p>&nbsp;</p>
-                    <input tabindex="1" type="text" name="adminName"></td>
-                <td>Phone Number<p>&nbsp;</p>
-                    <input tabindex="2" type="text" name="adminPhone"></td>
-                <td>Email Address<p>&nbsp;</p>
-                    <input tabindex="3" type="text" name="adminEmail"></td>
-                <td>Department Code<p>&nbsp;</p>
-                    <input tabindex="4" type="text" name="depCode"></td>
-            </tr>
-            <tr>
-                <td>I am the</td>    
-                <td colspan="3">
-                    <select tabindex="5" name="requesterType" id="requesterType">
-                        <option selected>--select one--</option>
-                        <option>Access Administrator</option>
-                        <option>Management Group Owner</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <p>&nbsp;</p>
-        <p>This form is used by the Access Administrator to request the following types of HBS updates:<p>&nbsp;</p>
-        <strong>
-            A. Change the Employee's Approver Role<p>&nbsp;</p>
-            B. Change to Employee's HR Admin Role<p>&nbsp;</p>
-            C. Replace Management Group Owner<p>&nbsp;</p>
-            D. Change to Employee&rsquo;s Reports Role<p>&nbsp;</p>
-        </strong>
-        </p>
-        <p>&nbsp;</p>
-        <table class="table--bordered">
-            <tr>
-                <th colspan="3"><div align="left">Employee Information</div></th>
-            </tr>
-            <tr>
-                <td>Name<p>&nbsp;</p>
-                    <input tabindex="6" type="text" name="employeeName"></td>
-                <td>Employee ID #<p>&nbsp;</p>
-                    <input tabindex="7" name="employeeID" type="text"></td>
-                <td>Management Group #<p>&nbsp;</p>
-                    <input tabindex="8" name="employeeManagementGroup" type="text" size="30">
-                </td>
-            </tr>
-            <tr>
-                <td>Is this individual a UCSF Employee? <p>&nbsp;</p></td>
-                <td colspan="2">
+                return document.MM_returnValue">
+        <p>This form can only be submitted by the Management Group Owner OR the Access Administrator. Fill in the appropriate section based on your role.</p>
+        <div class="row row--demo">
+            <div class="columns twelve"><b>Access Administrator or Management Group Owner Information</b></div>
+        </div>
+        <div class="row row--demo">
+            <div class="columns three">Name<input class="text-input" tabindex="1" type="text" name="adminName"></div>
+            <div class="columns three">Phone Number<input class="text-input" tabindex="2" type="text" name="adminPhone"></div>
+            <div class="columns three">Email Address<input class="text-input" tabindex="3" type="text" name="adminEmail"></div> 
+            <div class="columns three">Department Code<input class="text-input" tabindex="4" type="text" name="depCode"></div> 
+        </div>
+        <div class="row row--demo">
+            <div class="columns four">I am the</div>
+            <div class="columns eight">
+                <select tabindex="5" name="requesterType" id="requesterType">
+                    <option selected>--select one--</option>
+                    <option>Access Administrator</option>
+                    <option>Management Group Owner</option>
+                </select>
+            </div>
+        </div>
+        <?php
+        echo "<p>This form is used by the Access Administrator to request the following types of HBS updates:</p>"
+        . "<strong><p>A. Change the Employee's Approver Role</p>"
+        . "<p>B. Change to Employee's HR Admin Role</p>"
+        . "<p>C. Replace Management Group Owner</p>"
+        . "<p>D. Change to Employee's Reports Role</p></strong>";
+        ?>
 
-                    <input name="ucsfEmployee" type="radio" value="Yes">
-                    Yes &nbsp;
-                    <input name="ucsfEmployee" type="radio" value="No">
-                    No
-                </td>
-            </tr>
-        </table>
-        <p>&nbsp;</p>
 
-        <table class="table--bordered">
-            <tr>
-                <th colspan="2"><div align="left">A. Change to Employee's Approver Role </div></th>
-            </tr>
-            <tr>
-                <td>Request</td>
-                <td>
-                    <select name="approverRole" id="approverRole">
-                        <option>-select-</option>
-                        <option>Allow Approver Role</option>
-                        <option>Remove Approver Role</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <p>&nbsp;</p>
+        <div class="row row--demo">
+            <div class="columns twelve"><b>EMPLOYEE INFORMATION</b></div>
+        </div>
+        <div class="row row--demo">
+            <div class="columns four">Name<input class="text-input" tabindex="6" type="text" name="employeeName"></div>
+            <div class="columns four">Employee ID #<input class="text-input" tabindex="7" name="employeeID" type="text"></div>
+            <div class="columns four">Management Group #<input class="text-input" tabindex="8" name="employeeManagementGroup" type="text" size="30"></div> 
+        </div>
+        <div class="row row--demo">
+            <div class="columns four">Is this individual a UCSF Employee?</div>
+            <div class="columns eight">
+                <div class="row row--demo">
+                    <div class="columns four">
+                        <label class="label-radio">
+                            <input name="ucsfEmployee" type="radio" value="UCSF Employee">Yes
+                        </label>
+                    </div>
+                    <div class="columns four">
+                        <label class="label-radio">
+                            <input name="ucsfEmployee" type="radio" value="Not a UCSF Employee">No
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <table class="table--bordered">
-            <tr>
-                <th colspan="2" >
-            <div align="left">B. Change to Employee's HR Admin Role</div>
-            </th>
-            </tr>
-            <tr>
-                <td>Request</td>
-                <td>
-                    <select name="adminRole" id="AdminRole">
-                        <option> -select- </option>
-                        <option>Allow HR Admin Role</option>
-                        <option>Remove HR Admin Role</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Access Level</td>
-                <td>Group/Department Number</td>
-            </tr>
-            <tr>
-                <td><input name="ManagementGroupAccess" type="checkbox" id="ManagementGroupAccess" value="true">
-                    Management Group Access </td>
-                <td>
-                    <input name="ManagementGroup" type="text" id="ManagementGroup">
-                    Management Group # from HBS</span></td>
-            </tr>
-            <tr>
-                <td><input name="DepartmentGroupAccess" type="checkbox" id="DepartmentGroupAccess" value="true">
-                    Department Plus Access </td>
-                <td>
-                    <input name="DepartmentNum" type="text" id="DepartmentNum">
-                    Department # from Department Hierarchy</td>
-            </tr>
-        </table>
-        <p>Notes:</p>
-        <ul>
-            <li>Management Group &ndash; Provides the HBS HR Admin access to a single management group.</li>
-            <li>Department Plus &ndash; Provides the HBS HR Admin access to all &lsquo;child&rsquo; management groups under the &lsquo;parent&rsquo; department code. </li>
-        </ul>
-        <table class="table--bordered">
-            <tr>
-                <th colspan="2"><div align="left">C. Replace Management Group Owner</div></th>
-            </tr>
-            <tr>
-                <td>New Management Group Owner's Name</td>
-                <td>Employee ID # </td>
-            </tr>
-            <tr>
-                <td><input name="managementGroupName" type="text" id="managementGroupName"></td>
-                <td><input name="managementEmployeeID" type="text" id="managementEmployeeID"></td>
-            </tr>
 
-        </table>
-        <p>Note: The employee information provided at the top of the form should be for the existing Management Group Owner. Provide the employee information for the new Management Group Owner in section C.</p>
-        <table class="table--bordered"><p>&nbsp;</p>
-            <tr>
-                <th colspan="2"><div align="left">D. Change to Employee's Reports Role</div></th>
-            </tr>
-            <tr>
-                <td>Request</td>
-                <td><select name="reportsRole" size="1" id="24">
-                        <option value="">-select-</option>
-                        <option value="Allow">Allow Reports Role</option>
-                        <option value="Remove">Remove Reports Role</option>
-                    </select></td>
-            </tr>
-            <tr>
-                <td>Department Number</td>
-                <td><input type="text" name="roleDepartmentNumber" id="roleDepartmentNumber"></td>
-            </tr>
-        </table>
-        <p>Note: Employee will have access to run reports for the selected department and all &quot;child&quot; departments under it.</p>
-        <table class="table--bordered"><p>&nbsp;</p>
-            <tr>
-                <th>Comments</th>
-            </tr>
-            <tr>
-                <td><textarea name="comments" cols="80" rows="2" id="comments"></textarea></td>
-            </tr>
-        </table>
-        <p>CERTIFICATION: Submission of this form serves as your electronic signature. It certifies that the request aligns with policy and has been appropriately approved by the employee in accordance with departmental procedures. </p>
-        <p>&nbsp;</p>
-        <p>
-            <input name="validate" type="hidden" id="validate" value="true">
-        <div align="center"><input class="btn btn--primary btn--fix" type="submit" name="Submit" value="Submit Form"> </div>
-        </p>
+        <div class="row row--demo">
+            <div class="columns twelve"><b>A. Change to Employee's Approver Role</b></div>
+        </div>
+        <div class="row row--demo">
+            <div class="columns four">Request</div>
+            <div class="columns eight">
+                <select name="approverRole" id="approverRole">
+                    <option>-select-</option>
+                    <option>Allow Approver Role</option>
+                    <option>Remove Approver Role</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row row--demo">
+            <div class="columns twelve"><b>B. Change to Employee's HR Admin Role</b></div>
+        </div>
+        <div class="row row--demo">
+            <div class="columns four">Request</div>
+            <div class="columns eight">
+                <select name="adminRole" id="AdminRole">
+                    <option> -select- </option>
+                    <option>Allow HR Admin Role</option>
+                    <option>Remove HR Admin Role</option>
+                </select>
+            </div>
+        </div>
+        <div class="row row--demo">
+            <div class="columns four">Access Level</div>
+            <div class="columns eight">Group/Department Number</div>
+        </div>
+        <div class="row row--demo">
+            <div class="columns four">
+                <label class="label-checkbox">
+                    <input name="ManagementGroupAccess" type="checkbox" id="ManagementGroupAccess" value="true"/>Management Group Access
+                </label>
+            </div>
+            <div class="columns eight">
+                Management Group # from HBS
+                <input class="text-input" name="ManagementGroup" type="text" id="ManagementGroup">
+            </div>
+        </div>
+        <div class="row row--demo">
+            <div class="columns four">
+                <label class="label-checkbox">
+                    <input name="DepartmentGroupAccess" type="checkbox" id="DepartmentGroupAccess" value="true"/>Department Plus Access
+                </label>
+            </div>
+            <div class="columns eight">
+                Department # from Department Hierarchy
+                <input class="text-input" name="DepartmentNum" type="text" id="DepartmentNum">
+            </div>
+        </div>
+    </div>
+
+    <?php
+    echo "<p>Notes</p>"
+    . "<ul>"
+    . "<li>Management Group - Provides the HBS HR Admin access to a single management group.</li>"
+    . "<li>Department Plus - Provides the HBS HR Admin access to all 'child' management groups under the 'parent' department code.</li>"
+    . "</ul>";
+    ?>
+
+    <div class="row row--demo">
+        <div class="columns twelve"><b>C. Replace Management Group Owner</b></div>
+    </div>
+    <div class="row row--demo">
+        <div class="columns six">New Management Group Owner's Name</div>
+        <div class="columns six">Employee ID #</div>
+    </div>
+    <div class="row row--demo">
+        <div class="columns six">
+            <input class="text-input" name="managementGroupName" type="text" id="managementGroupName">
+        </div>
+        <div class="columns six">
+            <input class="text-input" name="managementEmployeeID" type="text" id="managementEmployeeID">
+        </div>
+    </div>
+
+
+    <div class="row row--demo">
+        <div class="columns twelve"><b>D. Change to Employee's Reports Role</b></div>
+    </div>
+    <div class="row row--demo">
+        <div class="columns four">Request</div>
+        <div class="columns eight">Department Number</div>
+    </div>
+    <div class="row row--demo">
+        <div class="columns four">
+            <select name="reportsRole" id="reportsRole">
+                <option value="">-select-</option>
+                <option value="Allow">Allow Reports Role</option>
+                <option value="Remove">Remove Reports Role</option>
+            </select>
+        </div>
+        <div class="columns eight"><input class="text-input" type="text" name="roleDepartmentNumber" id="roleDepartmentNumber"></div>
+    </div>
+
+    <div class="row row--demo">
+        <div class="columns twelve"><b>Comments</b></div>
+        <div class="columns twelve">
+            <textarea name="comments" cols="5" rows="5" id="comments"></textarea>
+        </div>
+    </div>
+
+    <p>CERTIFICATION: Submission of this form serves as your electronic signature. It certifies that the request aligns with policy and has been appropriately approved by the employee in accordance with departmental procedures. </p>
+    <p>&nbsp;</p>
+    <p>
+        <input name="validate" type="hidden" id="validate" value="true">
+    <div align="center"><input class="btn btn--primary btn--fix" type="submit" name="Submit" value="Submit Form"> </div>
+    </p>
     </form>
     <p>&nbsp;</p>
 
-<?php
+    <?php
 } else {
     echo "<pre>";
     echo "<h2>Email Sent</h2>\n";

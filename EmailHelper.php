@@ -49,7 +49,7 @@ include 'include/header.php';
                     <td>
                         <p>&nbsp;</p>
                         <p>
-                            Enter a valid <b>UCSF</b> email address below and we will email your UserID.
+                            Enter a valid <b>UCSF</b> email address that ends with <b>'@ucsf.edu'</b> below and we will email your UserID.
                         </p>
                         <?php
                         if (!isset($_POST['EmailAddress'])) {
@@ -98,7 +98,19 @@ include 'include/header.php';
                     <p>&nbsp;</p>
 
                     <strong>Message sent to <?php echo $EmailAddress . '.' ?></strong>
-
+                    
+                    <p>&nbsp;</p>
+                    
+                    <div><a href='https://ucsf.service-now.com/ess/home.do'>Login to Help@ucsf.edu here</a></div>
+                    <tr>
+                        
+                        <td colspan="4">
+                            <p>&nbsp;</p>
+                            <p>Still need help?&nbsp;Please call the ITS Service Desk at 514-4100, option 2.</p>
+                            <p>&nbsp;</p>
+                        </td>
+                        
+                    </tr>
                 <?php } else { ?>
                     <p>&nbsp;</p>
                     E-mail Address
@@ -118,7 +130,7 @@ include 'include/header.php';
             </table>
         </form>
 
-        <div><a href='https://ucsf.service-now.com/ess/home.do'>help@UCSF Login Page</a></div>
+        
 
     </div>
 
