@@ -1,5 +1,6 @@
 <?php
 require_once 'vendor/autoload.php';
+
 $config = parse_ini_file("conf/config.ini");
 $mailFrom = $config['Mail From'];
 $mailTo = $config['Mail To'];
@@ -161,7 +162,7 @@ if ($validate !== FALSE) {
     $mail->Host = $mailHost;
 
     $mail->From = $mailFrom;
-    $mail->FromName = 'NoReply';
+    $mail->FromName = 'noreply@ucsf.edu';
     $mail->AddAddress($mailTo);
     $mail->Subject = $subject;
     $mail->Body = $detail;
@@ -181,13 +182,59 @@ include 'include/header.php'
     <div class="row row--demo">
         <h2>Campus HBS Update Form</h2>
 
-        <noscript class="statusbar">
-        <br />
+        <noscript>
+        <p>&nbsp;</p>
         <p><font color="red">
-            Your browser does not support Help@UCSF Custom Applications <br />
-            please upgrade your browser or enable JavaScript support
+            Your browser does not support Help@UCSF Custom Applications <br>
+            please upgrade your browser or enable JavaScript support <br>
+
             </font></p>
+        <p>&nbsp;</p>
         </noscript>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#grace").click(function () {
+                    $("#A").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#adjustLeave").click(function () {
+                    $("#B").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#adjustMonths").click(function () {
+                    $("#C").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#grandfathered").click(function () {
+                    $("#D").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#overrideVaction").click(function () {
+                    $("#E").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#changeManagement").click(function () {
+                    $("#F").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#unRestricted_Time").click(function () {
+                    $("#G").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#autoPopulation_Time").click(function () {
+                    $("#H").toggle();
+                });
+            });
+        </script>
 
         <script type="text/JavaScript">
             function MM_findObj(n, d) { //v4.01
@@ -273,15 +320,14 @@ include 'include/header.php'
         </script>
         <form action="" method="post" name="form1" onSubmit="MM_validateForm('adminName', '', 'R', 'adminPhone', '', 'R', 'adminEmail', '', 'RisEmail', 'employeeName', '', 'R', 'employeeID', '', 'R', 'employeeManagementGroup', '', 'R');
                     return document.MM_returnValue">
-            
             <div class="row row--demo">
                 <div class="columns twelve"><b>HBS HR ADMIN INFORMATION</b></div>
             </div>
             <div class="row row--demo">
-                <div class="columns four">Name<input class="text-input" tabindex="1" type="text" name="adminName"></div>
+                <div class="columns four">Name<input autofocus class="text-input" type="text" name="adminName"></div>
 
-                <div class="columns four">Phone #<input class="text-input" tabindex="2" type="text" name="adminPhone"></div>
-                <div class="columns four">Email Address<input class="text-input" tabindex="3" type="text" name="adminEmail"></div> 
+                <div class="columns four">Phone #<input class="text-input" type="text" name="adminPhone"></div>
+                <div class="columns four">Email Address<input class="text-input" type="text" name="adminEmail"></div> 
             </div>  
             <p>This form is used by the HBS HR Admin to request the following types of HBS updates for the specified employee:</p>
             <div class="row row--demo">
@@ -306,6 +352,7 @@ include 'include/header.php'
                     </label>
                 </div>
             </div>
+
             <div class="row row--demo">
                 <div class="columns three">
                     <label class="label-checkbox">
@@ -329,14 +376,15 @@ include 'include/header.php'
                 </div>
             </div>
             <p>Note: Items G and H only apply to Bi-Weekly employees.</p>
+            <p>&nbsp;</p>
             <div class="row row--demo">
                 <div class="columns twelve"><b>EMPLOYEE INFORMATION</b></div>
             </div>
             <div class="row row--demo">
-                <div class="columns four">Name<input class="text-input" tabindex="4" type="text" name="employeeName"></div>
+                <div class="columns four">Name<input class="text-input" type="text" name="employeeName"></div>
 
-                <div class="columns four">Employee ID #<input class="text-input" tabindex="5" name="employeeID" type="text"></div>
-                <div class="columns four">Management Group #<input class="text-input" tabindex="6" name="employeeManagementGroup" type="text" size="30"></div> 
+                <div class="columns four">Employee ID #<input class="text-input" name="employeeID" type="text"></div>
+                <div class="columns four">Management Group #<input class="text-input" name="employeeManagementGroup" type="text" size="30"></div> 
             </div>
             <div class="row row--demo">
                 <div class="columns four">Is this individual a UCSF Employee?</div>
@@ -353,8 +401,9 @@ include 'include/header.php'
                     </div>
                 </div>
             </div>
+            <p>&nbsp;</p>
 
-            <div class="row row--demo">
+            <div class="row row--demo" id="A" style="display:none;">
                 <div class="columns twelve"><b>A. Provide a Grace Period for Vacation Maximum</b></div>
 
                 <div class="columns six">Bargaining Unit</div>
@@ -373,193 +422,215 @@ include 'include/header.php'
                     </select>  
                 </div>
             </div>
+            <p>&nbsp;</p>
 
-            <div class="row row--demo">
-                <div class="columns twelve"><b>B. Adjust Leave Balances</b></div>
-                <div class="columns two">Leave Type</div>
-                <div class="columns two">Type of Adjustment</div>
-                <div class="columns two">Effective Date (MM/DD/YYYY)</div>
-                <div class="columns two"># of hours to Add/Remove</div>
-                <div class="columns three">Reason</div>
-                <div class="columns one">Add/Remove</div>
-            </div>    
-            <div class="row row--demo">
-                <div class="columns two">Vacation Leave</div>
-                <div class="columns two">
-                    <select name="AdjustTypeVac" id="AdjustTypeVac">
-                        <option value=""> -select- </option>
-                        <option>Starting Balance</option>
-                        <option>Current Balance</option>
-                    </select>
+            <div id="B" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>B. Adjust Leave Balances</b></div>
+                    <div class="columns two">Leave Type</div>
+                    <div class="columns two">Type of Adjustment</div>
+                    <div class="columns two">Effective Date (MM/DD/YYYY)</div>
+                    <div class="columns two"># of hours to Add/Remove</div>
+                    <div class="columns three">Reason</div>
+                    <div class="columns one">Add/Remove</div>
+                </div>    
+                <div class="row row--demo">
+                    <div class="columns two">Vacation Leave</div>
+                    <div class="columns two">
+                        <select name="AdjustTypeVac" id="AdjustTypeVac">
+                            <option value=""> -select- </option>
+                            <option>Starting Balance</option>
+                            <option>Current Balance</option>
+                        </select>
+                    </div>
+                    <div class="columns two"><input class="text-input" name="AdjDateVac" type="text" id="AdjDateVac" size="12"></div>
+                    <div class="columns two"><input class="text-input" name="AdjHoursVac" type="text" id="AdjHoursVac" size="10"></div>
+                    <div class="columns three">
+                        <select name="AdjustReasonVac" id="AdjustReasonVac">
+                            <option value=""> -select- </option>
+                            <option>Inaccurate Starting Balance</option>
+                            <option>Catastrophic Leave</option>
+                            <option>Intercampus Transfer to UCSF</option>
+                            <option>Intercampus Transfer from UCSF</option>
+                            <option>Transfer with Med Center </option>
+                            <option>WC/Disability</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="columns one">
+                        <label class="label-radio">
+                            <input name="AdjVac" type="radio" value="Add Leave">Add
+                        </label>
+                        <label class="label-radio">
+                            <input name="AdjVac" type="radio" value="Remove Leave">Remove
+                        </label>
+                    </div>
                 </div>
-                <div class="columns two"><input class="text-input" name="AdjDateVac" type="text" id="AdjDateVac" size="12"></div>
-                <div class="columns two"><input class="text-input" name="AdjHoursVac" type="text" id="AdjHoursVac" size="10"></div>
-                <div class="columns three">
-                    <select name="AdjustReasonVac" id="AdjustReasonVac">
-                        <option value=""> -select- </option>
-                        <option>Inaccurate Starting Balance</option>
-                        <option>Catastrophic Leave</option>
-                        <option>Intercampus Transfer to UCSF</option>
-                        <option>Intercampus Transfer from UCSF</option>
-                        <option>Transfer with Med Center </option>
-                        <option>WC/Disability</option>
-                        <option>Other</option>
-                    </select>
+                <div class="row row--demo">
+                    <div class="columns two">Sick Leave</div>
+                    <div class="columns two">
+                        <select name="AdjustTypeSick" id="AdjustTypeSick">
+                            <option value=""> -select- </option>
+                            <option>Starting Balance</option>
+                            <option>Current Balance</option>
+                        </select>
+                    </div>
+                    <div class="columns two"><input class="text-input" name="AdjDateSick" type="text" id="AdjDateSick" size="12"></div>
+                    <div class="columns two"><input class="text-input" name="AdjHoursSick" type="text" id="AdjHoursSick" size="10"></div>
+                    <div class="columns three">
+                        <select name="AdjustReasonSick" id="AdjustReasonSick">
+                            <option value=""> -select- </option>
+                            <option>Inaccurate Starting Balance</option>
+                            <option>Rehire/Reinstatement</option>
+                            <option>Intercampus Transfer to UCSF</option>
+                            <option>Intercampus Transfer from UCSF</option>
+                            <option>Transfer with Med Center</option>
+                            <option>WC/Disability</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="columns one">
+                        <label class="label-radio">
+                            <input name="AdjSick" type="radio" value="Add Leave">Add
+                        </label>
+                        <label class="label-radio">
+                            <input name="AdjSick" type="radio" value="Remove Leave">Remove
+                        </label>
+                    </div>
                 </div>
-                <div class="columns one">
-                    <label class="label-radio">
-                        <input name="AdjVac" type="radio" value="Add Leave">Add
-                    </label>
-                    <label class="label-radio">
-                        <input name="AdjVac" type="radio" value="Remove Leave">Remove
-                    </label>
+                <div class="row row--demo">
+                    <div class="columns two">Comp Time</div>
+                    <div class="columns two">
+                        <select name="AdjustCompTime" id="AdjustCompTime">
+                            <option value=""> -select- </option>
+                            <option>Starting Balance</option>
+                            <option>Current Balance</option>
+                        </select>
+                    </div>
+                    <div class="columns two"><input class="text-input" name="AdjDateCompTime" type="text" id="AdjDateCompTime" size="12"></div>
+                    <div class="columns two"><input class="text-input" name="AdjHoursCompTime" type="text" id="AdjHoursCompTime" size="10"></div>
+                    <div class="columns three">
+                        <select name="AdjustReasonCompTime" id="AdjustReasonCompTime">
+                            <option value=""> -select- </option>
+                            <option>Inaccurate Starting Balance</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="columns one">
+                        <label class="label-radio">
+                            <input name="AdjCompTime" type="radio" value="Add Leave">Add
+                        </label>
+                        <label class="label-radio">
+                            <input name="AdjCompTime" type="radio" value="Remove Leave">Remove
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="row row--demo">
-                <div class="columns two">Sick Leave</div>
-                <div class="columns two">
-                    <select name="AdjustTypeSick" id="AdjustTypeSick">
-                        <option value=""> -select- </option>
-                        <option>Starting Balance</option>
-                        <option>Current Balance</option>
-                    </select>
-                </div>
-                <div class="columns two"><input class="text-input" name="AdjDateSick" type="text" id="AdjDateSick" size="12"></div>
-                <div class="columns two"><input class="text-input" name="AdjHoursSick" type="text" id="AdjHoursSick" size="10"></div>
-                <div class="columns three">
-                    <select name="AdjustReasonSick" id="AdjustReasonSick">
-                        <option value=""> -select- </option>
-                        <option>Inaccurate Starting Balance</option>
-                        <option>Rehire/Reinstatement</option>
-                        <option>Intercampus Transfer to UCSF</option>
-                        <option>Intercampus Transfer from UCSF</option>
-                        <option>Transfer with Med Center</option>
-                        <option>WC/Disability</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-                <div class="columns one">
-                    <label class="label-radio">
-                        <input name="AdjSick" type="radio" value="Add Leave">Add
-                    </label>
-                    <label class="label-radio">
-                        <input name="AdjSick" type="radio" value="Remove Leave">Remove
-                    </label>
-                </div>
-            </div>
-            <div class="row row--demo">
-                <div class="columns two">Comp Time</div>
-                <div class="columns two">
-                    <select name="AdjustCompTime" id="AdjustCompTime">
-                        <option value=""> -select- </option>
-                        <option>Starting Balance</option>
-                        <option>Current Balance</option>
-                    </select>
-                </div>
-                <div class="columns two"><input class="text-input" name="AdjDateCompTime" type="text" id="AdjDateCompTime" size="12"></div>
-                <div class="columns two"><input class="text-input" name="AdjHoursCompTime" type="text" id="AdjHoursCompTime" size="10"></div>
-                <div class="columns three">
-                    <select name="AdjustReasonCompTime" id="AdjustReasonCompTime">
-                        <option value=""> -select- </option>
-                        <option>Inaccurate Starting Balance</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-                <div class="columns one">
-                    <label class="label-radio">
-                        <input name="AdjCompTime" type="radio" value="Add Leave">Add
-                    </label>
-                    <label class="label-radio">
-                        <input name="AdjCompTime" type="radio" value="Remove Leave">Remove
-                    </label>
-                </div>
-            </div>
-            <p>Note: If selecting "Other" as the Reason, specify the reason in the comments section.</p>
-            
-            <div class="row row--demo">
-                <div class="columns twelve"><b>C. Adjust Months of Service</b></div>
-                <div class="columns three">Effective Date (MM/DD/YYYY)</div>
-                <div class="columns three"># of Months</div>
-                <div class="columns three">Reason(MM/DD/YYYY)</div>
-                <div class="columns three">Add/Remove</div>
-
-                <div class="columns three"><input class="text-input" name="monthsServiceEffectiveDate" type="text" id="monthsServiceEffectiveDate"></div>
-                <div class="columns three"><input class="text-input" name="adjustNumberMonths" type="text" id="adjustNumberMonths"></div>
-                <div class="columns three">
-                    <select name="MOSAdjustReason" id="MOSAdjustReason">
-                        <option value=""> -select- </option>
-                        <option>Prior Service Credit</option>
-                        <option>Intercampus Transfer</option>
-                        <option>Inaccurate Starting MOS</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-                <div class="columns three">
-                    <label class="label-radio">
-                        <input name="monthsService" type="radio" value="Add Months Service">Add
-                    </label>
-                    <label class="label-radio">
-                        <input name="monthsService" type="radio" value="Remove Months Service">Remove
-                    </label>
-                </div>
-            </div>
-            <p>Note: If selecting "Other" as the Reason, specify the reason in the comments section.</p>
-
-            <div class="row row--demo">
-                <div class="columns twelve"><b>D. End Grandfathered Status</b></div>
-                <div class="columns four">End Date (MM/DD/YYYY)</div>
-                <div class="columns eight"><input class="text-input" name="dateEndGrandfathered" type="text" id="dateEndGrandfathered"></div>
+                <p>Note: If selecting "Other" as the Reason, specify the reason in the comments section.</p>
+                <p>&nbsp;</p>
             </div>
 
-            <div class="row row--demo">
-                <div class="columns twelve"><b>E. Override Vacation Eligibility</b></div>
-                <div class="columns four">Date From (MM/DD/YYYY)</div>
-                <div class="columns four">Date To (MM/DD/YYYY)</div>
-                <div class="columns four">Eligibility Status (MM/DD/YYYY)</div>
-                <div class="columns four"><input class="text-input" name="vacationOverrRideStart" type="text" id="vacationOverrRideStart"></div>
-                <div class="columns four"><input class="text-input" name="vacationOverrRideEnd" type="text" id="vacationOverrRideEnd"></div>
-                <div class="columns four">
-                    <select name="EligibilityStatus" id="EligibilityStatus">
-                        <option value=""> -select- </option>
-                        <option>Eligible</option>
-                        <option>Ineligible</option>
-                    </select>
-                </div>
-                <div class="columns twelve"><b>Reason</b></div>
-                <div class="columns twelve"><textarea name="vacationOverrideReason" cols="5" rows="5" id="comments"></textarea></div>
-            </div>
-            <p>Note: Dates must be month end dates.</p>
+            <div id="C" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>C. Adjust Months of Service</b></div>
+                    <div class="columns three">Effective Date (MM/DD/YYYY)</div>
+                    <div class="columns three"># of Months</div>
+                    <div class="columns three">Reason(MM/DD/YYYY)</div>
+                    <div class="columns three">Add/Remove</div>
 
-            <div class="row row--demo">
-                <div class="columns twelve"><b>F. Change Management Group</b></div>
-                <div class="columns four">New Management Group # </div>
-                <div class="columns eight"><input class="text-input" name="managementGroupNumber" type="text" id="managementGroupNumber"></div>
-            </div>
-
-            <div class="row row--demo">
-                <div class="columns twelve"><b>G. Assign/Remove Non-Exempt Unrestricted Timesheet</b></div>
-                <div class="columns four">Request</div>
-                <div class="columns eight">
-                    <select name="unResTimeRequest" id="unResTimeRequest">
-                        <option value=""> -select- </option>
-                        <option>Eligible</option>
-                        <option>Ineligible</option>
-                    </select>
+                    <div class="columns three"><input class="text-input" name="monthsServiceEffectiveDate" type="text" id="monthsServiceEffectiveDate"></div>
+                    <div class="columns three"><input class="text-input" name="adjustNumberMonths" type="text" id="adjustNumberMonths"></div>
+                    <div class="columns three">
+                        <select name="MOSAdjustReason" id="MOSAdjustReason">
+                            <option value=""> -select- </option>
+                            <option>Prior Service Credit</option>
+                            <option>Intercampus Transfer</option>
+                            <option>Inaccurate Starting MOS</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="columns three">
+                        <label class="label-radio">
+                            <input name="monthsService" type="radio" value="Add Months Service">Add
+                        </label>
+                        <label class="label-radio">
+                            <input name="monthsService" type="radio" value="Remove Months Service">Remove
+                        </label>
+                    </div>
                 </div>
+                <p>Note: If selecting "Other" as the Reason, specify the reason in the comments section.</p>
+                <p>&nbsp;</p>
             </div>
 
-            <div class="row row--demo">
-                <div class="columns twelve"><b>H. Assign/Remove Auto-Population of Timesheet</b></div>
-                <div class="columns four">Request</div>
-                <div class="columns eight">
-                    <select name="autoPopTimeRequest" id="autoPopTimeRequest">
-                        <option value=""> -select- </option>
-                        <option>Eligible</option>
-                        <option>Ineligible</option>
-                    </select>
+            <div id="D" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>D. End Grandfathered Status</b></div>
+                    <div class="columns four">End Date (MM/DD/YYYY)</div>
+                    <div class="columns eight"><input class="text-input" name="dateEndGrandfathered" type="text" id="dateEndGrandfathered"></div>
                 </div>
+                <p>&nbsp;</p>
             </div>
-            
+
+            <div id="E" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>E. Override Vacation Eligibility</b></div>
+                    <div class="columns four">Date From (MM/DD/YYYY)</div>
+                    <div class="columns four">Date To (MM/DD/YYYY)</div>
+                    <div class="columns four">Eligibility Status (MM/DD/YYYY)</div>
+                    <div class="columns four"><input class="text-input" name="vacationOverrRideStart" type="text" id="vacationOverrRideStart"></div>
+                    <div class="columns four"><input class="text-input" name="vacationOverrRideEnd" type="text" id="vacationOverrRideEnd"></div>
+                    <div class="columns four">
+                        <select name="EligibilityStatus" id="EligibilityStatus">
+                            <option value=""> -select- </option>
+                            <option>Eligible</option>
+                            <option>Ineligible</option>
+                        </select>
+                    </div>
+                    <div class="columns twelve"><b>Reason</b></div>
+                    <div class="columns twelve"><textarea name="vacationOverrideReason" cols="5" rows="5" id="comments"></textarea></div>
+                </div>
+                <p>Note: Dates must be month end dates.</p>
+                <p>&nbsp;</p>
+            </div>
+
+            <div id="F" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>F. Change Management Group</b></div>
+                    <div class="columns four">New Management Group # </div>
+                    <div class="columns eight"><input class="text-input" name="managementGroupNumber" type="text" id="managementGroupNumber"></div>
+                </div>
+                <p>&nbsp;</p>
+            </div>
+
+            <div id="G" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>G. Assign/Remove Non-Exempt Unrestricted Timesheet</b></div>
+                    <div class="columns four">Request</div>
+                    <div class="columns eight">
+                        <select name="unResTimeRequest" id="unResTimeRequest">
+                            <option value=""> -select- </option>
+                            <option>Eligible</option>
+                            <option>Ineligible</option>
+                        </select>
+                    </div>
+                </div>
+                <p>&nbsp;</p>
+            </div>
+
+            <div id="H" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>H. Assign/Remove Auto-Population of Timesheet</b></div>
+                    <div class="columns four">Request</div>
+                    <div class="columns eight">
+                        <select name="autoPopTimeRequest" id="autoPopTimeRequest">
+                            <option value=""> -select- </option>
+                            <option>Eligible</option>
+                            <option>Ineligible</option>
+                        </select>
+                    </div>
+                </div>
+                <p>&nbsp;</p>
+            </div>
+
             <div class="row row--demo">
                 <div class="columns twelve"><b>Comments</b></div>
                 <div class="columns twelve"><textarea name="comments" cols="5" rows="5" id="comments"></textarea></div>

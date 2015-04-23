@@ -29,7 +29,6 @@ if (!empty($_POST['EmailAddress'])) {
 include 'include/header.php';
 ?>
 
-
 <div class="row row--demo">
     <div class="columns three"> </div>
     <div class="columns six">
@@ -57,7 +56,7 @@ include 'include/header.php';
                             <p>&nbsp;</p>
                             E-mail Address
 
-                            <input class="text-input" tabindex="1" name="EmailAddress" type="text" size="30">
+                            <input class="text-input" tabindex="1" name="EmailAddress" autofocus type="text" size="30">
                         </td>
                     </tr>
 
@@ -114,7 +113,7 @@ include 'include/header.php';
                 <?php } else { ?>
                     <p>&nbsp;</p>
                     E-mail Address
-                    <input class="text-input input-error" name="EmailAddress" type="text" size="30">
+                    <input class="text-input input-error" name="EmailAddress" autofocus type="text" size="30">
                     <label class="label-error">Please enter a valid UCSF email address.</label>
 
                     <tr>
