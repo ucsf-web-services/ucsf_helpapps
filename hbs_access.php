@@ -1,59 +1,54 @@
 <?php
 require_once 'vendor/autoload.php';
 
+$config = parse_ini_file("conf/config.ini");
 
-$mailFrom = "DAISY@ucsf.edu";
-$mailTo = "Stephen.Cheung@ucsf.edu";
-//$mailHost = "CUDA.UCSF.EDU";
-$mailHost = "jingo.ucsf.edu";
+$mailFrom = $config['Mail From'];
+$mailTo = $config['Mail To'];
+
+$mailHost = $config['Mail Host'];
 $validate = FALSE;
 
 $adminName = (empty($_POST['adminName']) ? NULL : $_POST['adminName']);
-//$adminName = $_POST['adminName'];
+
 $adminPhone = (empty($_POST['adminPhone']) ? NULL : $_POST['adminPhone']);
-//$adminPhone = @$_POST['adminPhone'];
+
 $adminEmail = (empty($_POST['adminEmail']) ? NULL : $_POST['adminEmail']);
-//$adminEmail = @$_POST['adminEmail'];
+
 $depCode = (empty($_POST['depCode']) ? NULL : $_POST['depCode']);
-//$depCode = @$_POST['depCode'];
 
 $employeeName = (empty($_POST['employeeName']) ? NULL : $_POST['employeeName']);
-//$employeeName = @$_POST['employeeName'];
+
 $employeeID = (empty($_POST['employeeID']) ? NULL : $_POST['employeeID']);
-//$employeeID = @$_POST['employeeID'];
+
 $employeeManagementGroup = (empty($_POST['employeeManagementGroup']) ? NULL : $_POST['employeeManagementGroup']);
-//$employeeManagementGroup = @$_POST['employeeManagementGroup'];
+
 $ucsfEmployee = (empty($_POST['ucsfEmployee']) ? NULL : $_POST['ucsfEmployee']);
-//$ucsfEmployee = @$_POST['ucsfEmployee'];
-//
+
 $approverRole = (empty($_POST['approverRole']) ? NULL : $_POST['approverRole']);
-//$approverRole = @$_POST['approverRole'];
+
 $adminRole = (empty($_POST['adminRole']) ? NULL : $_POST['adminRole']);
-//$adminRole = @$_POST['adminRole'];
+
 $ManagementGroupAccess = (empty($_POST['ManagementGroupAccess']) ? NULL : $_POST['ManagementGroupAccess']);
-//$ManagementGroupAccess = @$_POST['ManagementGroupAccess'];
+
 $ManagementGroup = (empty($_POST['ManagementGroup']) ? NULL : $_POST['ManagementGroup']);
-//$ManagementGroup = @$_POST['ManagementGroup'];
+
 $DepartmentGroupAccess = (empty($_POST['DepartmentGroupAccess']) ? NULL : $_POST['DepartmentGroupAccess']);
-//$DepartmentGroupAccess = @$_POST['DepartmentGroupAccess'];
+
 $DepartmentNum = (empty($_POST['DepartmentNum']) ? NULL : $_POST['DepartmentNum']);
-//$DepartmentNum = @$_POST['DepartmentNum'];
-//
+
 $managementGroupName = (empty($_POST['managementGroupName']) ? NULL : $_POST['managementGroupName']);
-//$managementGroupName = @$_POST['managementGroupName'];
+
 $managementEmployeeID = (empty($_POST['managementEmployeeID']) ? NULL : $_POST['managementEmployeeID']);
-//$managementEmployeeID = @$_POST['managementEmployeeID'];
+
 $reportsRole = (empty($_POST['reportsRole']) ? NULL : $_POST['reportsRole']);
-//$reportsRole = @$_POST['reportsRole'];
+
 $roleDepartmentNumber = (empty($_POST['roleDepartmentNumber']) ? NULL : $_POST['roleDepartmentNumber']);
-//$roleDepartmentNumber = @$_POST['roleDepartmentNumber'];
+
 $comments = (empty($_POST['comments']) ? NULL : $_POST['comments']);
-//$comments = @$_POST['comments'];
 
+$validate = (empty($_POST['validate']) ? FALSE : $_POST['validate']);
 
-//if ($_POST['validate'] !== null) {
-    $validate = (empty($_POST['validate']) ? FALSE : $_POST['validate']);
-//}
 
 
 
@@ -122,11 +117,8 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
     $mail->IsSMTP();
     $mail->Host = $mailHost;
 
-//    $mail->SMTPAuth   = true;
-//    $mail->SMTPSecure = "tls"; 
-//    $mail->Port       = 587;
-
     $mail->From = $mailFrom;
+    $mail->FromName = 'NoReply';
     $mail->AddAddress($mailTo);
     $mail->Subject = $subject;
     $mail->Body = $detail;
@@ -134,379 +126,316 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
     if (!$mail->Send()) {
         echo 'Message was not sent.';
         echo 'Mailer error: ' . $mail->ErrorInfo;
-    } 
-    
-   
+    }
 }
+
+include 'include/header.php';
 ?>
+<?php if ($validate === FALSE) { ?>
 
-<!doctype html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>help@UCSF: Campus HBS Access Form</title>
-        <link type="text/css" rel="stylesheet" href="css/main.css">
-        <style>
-            .wrapper{
-                background-color: #B3B9BF;
+    <div class="row row--demo">
+        <h2>Campus HBS Access Form</h2>
+
+        <!-- ***************************************************************** -->
+        <noscript>
+        <p>&nbsp;</p>
+        <p><font color="red">
+            Your browser does not support Help@UCSF Custom Applications <br>
+            please upgrade your browser or enable JavaScript support <br>
+
+            </font></p>
+        <p>&nbsp;</p>
+        </noscript>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#approverRoleCheck").click(function () {
+                    $("#A").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#adminRoleCheck").click(function () {
+                    $("#B").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#replaceGroupOwnerCheck").click(function () {
+                    $("#C").toggle();
+                });
+            });
+            $(document).ready(function () {
+                $("#reportsRoleCheck").click(function () {
+                    $("#D").toggle();
+                });
+            });
+        </script>
+
+        <script language="JavaScript" type="text/JavaScript">
+            function MM_findObj(n, d) { //v4.01
+            var p,i,x;  
+
+            if(!d) d=document; 
+
+            if((p=n.indexOf("?"))>0&&parent.frames.length) {
+
+            d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);
+
             }
-            .white-container {
-                background-color: #FFFFFF;
-                display: block;
-                max-width: 1230px;
-                margin: 0 auto;
-                padding-left:15px;
-                font-family: 'HelveticaNeueLTStd',arial, sans-serif;
-                padding-right:15px;
-            }
-            .footer{
-                position: relative;
-                width:100%;
-                background-color: #000000;
-                color:#ffffff;
-                font-family: 'HelveticaNeueLTStd',arial, sans-serif;
-                clear:both;
-                max-width: 1230px;
-                margin: 0 auto;
-                padding-left:30px;
+
+            if(!(x=d[n])&&d.all) 
+            x=d.all[n]; 
+
+            for (i=0;!x&&i<d.forms.length;i++) 
+            x=d.forms[i][n];
+
+            for(i=0;!x&&d.layers&&i<d.layers.length;i++) 
+            x=MM_findObj(n,d.layers[i].document);
+
+            if(!x && d.getElementById) 
+            x=d.getElementById(n); 
+            return x;
             }
 
-            .top-header-container{
-                max-width:1230px;
-                margin: 0 auto;
-                font-family:HelveticaNeueLTStd-Roman, arial, san-serif;
+            function MM_validateForm() { //v4.0
+            var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
+            for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=MM_findObj(args[i]);
+            if (val) { nm=val.name; if ((val=val.value)!="") {
+            if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
+            if (p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
+            } else if (test!='R') { num = parseFloat(val);
+            if (isNaN(val)) errors+='- '+nm+' must contain a number.\n';
+            if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
+            min=test.substring(8,p); max=test.substring(p+1);
+            if (num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
+            } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' is required.\n'; }
+            } if (errors) alert('The following error(s) occurred:\n'+errors);
+            document.MM_returnValue = (errors == '');
             }
+        </script>
 
-            .nav-bar .brand-logo {
-                box-shadow: none;
-            }
-
-            .nav-bar {
-                border-bottom: 1px #fff solid;
-            }
-
-        </style>
-    </head>
-
-    <body class="wrapper">
-        <!-- start banner -->
-        <div id="ucsf-banner-nav" class="no-logo">
-            <div class="top-header-container row">
-                <ul class="menu">
-                    <li class="first"><a href="http://www.ucsf.edu">University of California San Francisco</a></li>
-                    <li><a href="http://www.ucsfhealth.org/">UCSF Medical Center</a></li>
-                    <li><a href="http://www.ucsf.edu/search" title="">Search UCSF</a></li>
-                    <li><a href="http://www.ucsf.edu/about">About UCSF</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- end banner -->
-        <!--Site Header (subbrand and navigation)-->
-        <!-- Start Page Container -->
-        <div class="white-container">
-            <!-- Start Navigation -->
-            <header class="nav-bar">
-                <div class="brand-logo"><img src="imgs/UCSF_InfoTechnology_navy_RGB-2.png" height="58" width="227" border="0" hspace="14"></div>
-            </header>
-            <!--/Site Header (subbrand and navigation)-->
-            <!-- Content -->
-            
-            <?php if($validate === FALSE) { ?>
-            
-            <div class="row row--demo">
-                <h2>Campus HBS Access Form</h2>
-
-                <!-- ***************************************************************** -->
-                <noscript class="statusbar">
-                <br />
-                <p><font color="red">
-                    Your browser does not support Help@UCSF Custom Applications <br />
-                    please upgrade your browser or enable JavaScript support
-                    </font></p>
-                </noscript>
-                <!-- ***************************************************************** -->
-
-                <script language="JavaScript" type="text/JavaScript">
-                    <!--
-                    function MM_findObj(n, d) { //v4.01
-                    var p,i,x;  
-                    
-                    if(!d) d=document; 
-                    
-                    if((p=n.indexOf("?"))>0&&parent.frames.length) {
-                        
-                    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);
-                    
-                    }
-                    
-                    if(!(x=d[n])&&d.all) 
-                        x=d.all[n]; 
-                    
-                    for (i=0;!x&&i<d.forms.length;i++) 
-                        x=d.forms[i][n];
-                    
-                    for(i=0;!x&&d.layers&&i<d.layers.length;i++) 
-                        x=MM_findObj(n,d.layers[i].document);
-                    
-                    if(!x && d.getElementById) 
-                        x=d.getElementById(n); 
-                    return x;
-                    }
-
-                    function MM_validateForm() { //v4.0
-                    var i,p,q,nm,test,num,min,max,errors='',args=MM_validateForm.arguments;
-                    for (i=0; i<(args.length-2); i+=3) { test=args[i+2]; val=MM_findObj(args[i]);
-                    if (val) { nm=val.name; if ((val=val.value)!="") {
-                    if (test.indexOf('isEmail')!=-1) { p=val.indexOf('@');
-                    if (p<1 || p==(val.length-1)) errors+='- '+nm+' must contain an e-mail address.\n';
-                    } else if (test!='R') { num = parseFloat(val);
-                    if (isNaN(val)) errors+='- '+nm+' must contain a number.\n';
-                    if (test.indexOf('inRange') != -1) { p=test.indexOf(':');
-                    min=test.substring(8,p); max=test.substring(p+1);
-                    if (num<min || max<num) errors+='- '+nm+' must contain a number between '+min+' and '+max+'.\n';
-                    } } } else if (test.charAt(0) == 'R') errors += '- '+nm+' is required.\n'; }
-                    } if (errors) alert('The following error(s) occurred:\n'+errors);
-                    document.MM_returnValue = (errors == '');
-                    }
-                    //-->
-                </script>
-
-                <p><strong>This form can only be submitted by the Management Group Owner OR the Access Administrator. Fill in the appropriate section based on <em>your role</em>.</strong> </p>
-
-                <form action="" method="post" name="form1" onsubmit="MM_validateForm('adminName', '', 'R', 'ucsfEmployee', '', 'R', 'depCode', '', 'R', 'adminPhone', '', 'R', 'adminEmail', '', 'RisEmail', 'employeeName', '', 'R', 'employeeID', '', 'R', 'employeeManagementGroup', '', 'R');
+        <form action="" method="post" name="form1" onsubmit="MM_validateForm('adminName', '', 'R', 'ucsfEmployee', '', 'R', 'depCode', '', 'R', 'adminPhone', '', 'R', 'adminEmail', '', 'RisEmail', 'employeeName', '', 'R', 'employeeID', '', 'R', 'employeeManagementGroup', '', 'R');
                     return document.MM_returnValue">
-                    <table class="table--bordered">
-                        <tr>
-                            <th colspan="4"><div align="left"> Access Administrator or Management Group Owner Information</div> </th>
-                        </tr>
-                        <tr>
-                            <td>Name<br>
-                                <input type="text" name="adminName"></td>
-                            <td>Phone Number<br>
-                                <input type="text" name="adminPhone"></td>
-                            <td>Email Address<br>
-                                <input type="text" name="adminEmail"></td>
-                            <td>Department Code<br>
-                                <input type="text" name="depCode"></td>
-                        </tr>
-                        <tr>
-
-                            <td>I am the</td>    
-
-                            <td colspan="3">
-                                <select name="requesterType" id="requesterType">
-                                    <option selected>--select one--</option>
-                                    <option>Access Administrator</option>
-                                    <option>Management Group Owner</option>
-                                </select>
-                            </td>
-
-                        </tr>
-                    </table>
-
-                    <br>
-
-                    <p>This form is used by the Access Administrator to request the following types of HBS updates:<br>
-                        <strong>
-                            A. Change the Employee's Approver Role<br>
-                            B. Change to Employee's HR Admin Role<br>
-                            C. Replace Management Group Owner<br>
-                            D. Change to Employee&rsquo;s Reports Role<br>
-                        </strong>
-                    </p>
-
-                    <br>
-
-                    <table class="table--bordered">
-                        <tr>
-                            <th colspan="3"><div align="left">Employee Information</div></th>
-                        </tr>
-
-                        <tr>
-                            <td>Name<br>
-                                <input type="text" name="employeeName"></td>
-                            <td>Employee ID #<br>
-                                <input name="employeeID" type="text"></td>
-                            <td>Management Group #<br>
-                                <input name="employeeManagementGroup" type="text" size="30">
-                            </td>
-                        </tr>
-
-
-
-                        <tr>
-                            <td>Is this individual a UCSF Employee? <br></td>
-                            <td colspan="2">
-
-                                <input name="ucsfEmployee" type="radio" value="Yes">
-                                Yes &nbsp;
-                                <input name="ucsfEmployee" type="radio" value="No">
-                                No
-                            </td>
-                        </tr>
-
-
-                    </table>
-                    <p>&nbsp;</p>
-
-                    <table class="table--bordered">
-                        <tr>
-                            <th colspan="2"><div align="left">A. Change to Employee's Approver Role </div></th>
-                        </tr>
-                        <tr>
-                            <td>Request</td>
-
-                            <td>
-                                <select name="approverRole" id="approverRole">
-                                    <option>-select-</option>
-                                    <option>Allow Approver Role</option>
-                                    <option>Remove Approver Role</option>
-                                </select>
-
-
-
-                            </td>
-                        </tr>
-                    </table>
-                    <p>&nbsp;</p>
-
-                    <table class="table--bordered">
-                        <tr>
-                            <th colspan="2" >
-                        <div align="left">B. Change to Employee's HR Admin Role</div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>Request</td>
-                            <td>
-                                <select name="adminRole" id="AdminRole">
-                                    <option> -select- </option>
-                                    <option>Allow HR Admin Role</option>
-                                    <option>Remove HR Admin Role</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Access Level</td>
-                            <td>Group/Department Number</td>
-                        </tr>
-                        <tr>
-                            <td><input name="ManagementGroupAccess" type="checkbox" id="ManagementGroupAccess" value="true">
-                                Management Group Access </td>
-                            <td>
-                                <input name="ManagementGroup" type="text" id="ManagementGroup">
-                                Management Group # from HBS</span></td>
-                        </tr>
-                        <tr>
-                            <td><input name="DepartmentGroupAccess" type="checkbox" id="DepartmentGroupAccess" value="true">
-                                Department Plus Access </td>
-                            <td>
-                                <input name="DepartmentNum" type="text" id="DepartmentNum">
-                                Department # from Department Hierarchy</td>
-                        </tr>
-                    </table>
-                    <p>Notes:</p>
-                    <ul>
-                        <li>Management Group &ndash; Provides the HBS HR Admin access to a single management group.</li>
-                        <li>Department Plus &ndash; Provides the HBS HR Admin access to all &lsquo;child&rsquo; management groups under the &lsquo;parent&rsquo; department code. </li>
-                    </ul>
-                    <table class="table--bordered">
-                        <tr>
-                            <th colspan="2"><div align="left">C. Replace Management Group Owner</div></th>
-                        </tr>
-                        <tr>
-                            <td>New Management Group Owner's Name</td>
-                            <td>Employee ID # </td>
-                        </tr>
-                        <tr>
-                            <td><input name="managementGroupName" type="text" id="managementGroupName"></td>
-                            <td><input name="managementEmployeeID" type="text" id="managementEmployeeID"></td>
-                        </tr>
-
-
-
-                    </table>
-                    <p>Note: The employee information provided at the top of the form should be for the existing Management Group Owner. Provide the employee information for the new Management Group Owner in section C.</p>
-                    <table class="table--bordered"><br>
-                        <tr>
-                            <th colspan="2"><div align="left">D. Change to Employee's Reports Role</div></th>
-                        </tr>
-                        <tr>
-                            <td>Request</td>
-                            <td><select name="reportsRole" size="1" id="24">
-                                    <option value="">-select-</option>
-                                    <option value="Allow">Allow Reports Role</option>
-                                    <option value="Remove">Remove Reports Role</option>
-                                </select></td>
-                        </tr>
-                        <tr>
-                            <td>Department Number</td>
-                            <td><input type="text" name="roleDepartmentNumber" id="roleDepartmentNumber"></td>
-                        </tr>
-                    </table>
-                    <p>Note: Employee will have access to run reports for the selected department and all &quot;child&quot; departments under it.</p>
-                    <table class="table--bordered"><br>
-                        <tr>
-                            <th>Comments</th>
-                        </tr>
-                        <tr>
-                            <td><textarea name="comments" cols="80" rows="2" id="comments"></textarea></td>
-                        </tr>
-                    </table>
-                    <p>CERTIFICATION: Submission of this form serves as your electronic signature. It certifies that the request aligns with policy and has been appropriately approved by the employee in accordance with departmental procedures. </p>
-                    <p>&nbsp;</p>
-                    <p>
-                        <input name="validate" type="hidden" id="validate" value="true">
-                    <div align="center"><input class="btn btn--primary btn--fix" type="submit" name="Submit" value="Submit Form"> </div>
-                    </p>
-                </form>
-                <p>&nbsp;</p>
-
-
-
-
-                <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-                <script type="text/javascript">
-                    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-                    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-                </script>
-                <script type="text/javascript">
-                    try {
-                        var pageTracker = _gat._getTracker("UA-2208693-9");
-                        pageTracker._trackPageview();
-                    } catch (err) {
-                    }
-                </script>
-            <?php } else { 
-                echo "<pre>";
-                echo "<h2>Email Sent</h2>\n";
-                echo "From: " . $mailFrom . "\n";
-                echo "To: " . $mailTo . "\n";
-                echo "Subject: " . $subject . "\n";
-                echo "_______________________ \n";
-                echo $detail;
-                echo "</pre>";
-               
-            }
-            ?>
-                
-                
-                
-                
-                
-                
-                
-                
-                <!-- /Content-->
-                <!-- Start Footer -->
-                <div class="footer">
-                    <footer>
-                        &copy; 2015 University of California Regents, All Rights Reserved.
-                    </footer>
-                </div>
-                <!-- End Footer -->
+            <p>This form can only be submitted by the Management Group Owner OR the Access Administrator. Fill in the appropriate section based on your role.</p>
+            <div class="row row--demo">
+                <div class="columns twelve"><b>Access Administrator or Management Group Owner Information</b></div>
             </div>
-            <!-- end of container -->
-    </body>
+            <div class="row row--demo">
+                <div class="columns three">Name<input autofocus class="text-input" type="text" name="adminName"></div>
+                <div class="columns three">Phone Number<input class="text-input" type="text" name="adminPhone"></div>
+                <div class="columns three">Email Address<input class="text-input" type="text" name="adminEmail"></div> 
+                <div class="columns three">Department Code<input class="text-input" type="text" name="depCode"></div> 
+            </div>
+            <div class="row row--demo">
+                <div class="columns four">I am the</div>
+                <div class="columns eight">
+                    <select name="requesterType" id="requesterType">
+                        <option selected>--select one--</option>
+                        <option>Access Administrator</option>
+                        <option>Management Group Owner</option>
+                    </select>
+                </div>
+            </div>
+            <p>&nbsp;</p>
 
-</html>
+            <div class="row row--demo">
+                <div class="columns three">
+                    <label class="label-checkbox">
+                        <input name="approverRoleCheck" type="checkbox" id="approverRoleCheck" value="true"/>A. Change the Employee's Approver Role
+                    </label>            
+                </div>
+                <div class="columns three">
+                    <label class="label-checkbox">
+                        <input name="adminRoleCheck" type="checkbox" id="adminRoleCheck" value="true">B. Change to Employee's HR Admin Role
+                    </label>
+                </div>
+                <div class="columns three">
+                    <label class="label-checkbox">
+                        <input name="replaceGroupOwnerCheck" type="checkbox" id="replaceGroupOwnerCheck" value="true">C. Replace Management Group Owner
+                    </label>
+                </div>
+                <div class="columns three">
+                    <label class="label-checkbox">
+                        <input name="reportsRoleCheck" type="checkbox" id="reportsRoleCheck" value="true">D. Change to Employee's Reports Role
+                    </label>
+                </div>
+            </div>
+
+            <p>&nbsp;</p>
+            <div class="row row--demo">
+                <div class="columns twelve"><b>EMPLOYEE INFORMATION</b></div>
+            </div>
+            <div class="row row--demo">
+                <div class="columns four">Name<input class="text-input" type="text" name="employeeName"></div>
+                <div class="columns four">Employee ID #<input class="text-input" name="employeeID" type="text"></div>
+                <div class="columns four">Management Group #<input class="text-input" name="employeeManagementGroup" type="text" size="30"></div> 
+            </div>
+            <div class="row row--demo">
+                <div class="columns four">Is this individual a UCSF Employee?</div>
+                <div class="columns eight">
+                    <div class="row row--demo">
+                        <div class="columns four">
+                            <label class="label-radio">
+                                <input name="ucsfEmployee" type="radio" value="UCSF Employee">Yes
+                            </label>
+                        </div>
+                        <div class="columns four">
+                            <label class="label-radio">
+                                <input name="ucsfEmployee" type="radio" value="Not a UCSF Employee">No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+
+            <div id="A" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>A. Change to Employee's Approver Role</b></div>
+                </div>
+                <div class="row row--demo">
+                    <div class="columns four">Request</div>
+                    <div class="columns eight">
+                        <select name="approverRole" id="approverRole">
+                            <option>-select-</option>
+                            <option>Allow Approver Role</option>
+                            <option>Remove Approver Role</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="B" style="display:none;">
+                <p>&nbsp;</p>
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>B. Change to Employee's HR Admin Role</b></div>
+                </div>
+                <div class="row row--demo">
+                    <div class="columns four">Request</div>
+                    <div class="columns eight">
+                        <select name="adminRole" id="AdminRole">
+                            <option> -select- </option>
+                            <option>Allow HR Admin Role</option>
+                            <option>Remove HR Admin Role</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row row--demo">
+                    <div class="columns four">Access Level</div>
+                    <div class="columns eight">Group/Department Number</div>
+                </div>
+                <div class="row row--demo">
+                    <div class="columns four">
+                        <label class="label-checkbox">
+                            <input name="ManagementGroupAccess" type="checkbox" id="ManagementGroupAccess" value="true"/>Management Group Access
+                        </label>
+                    </div>
+                    <div class="columns eight">
+                        Management Group # from HBS
+                        <input class="text-input" name="ManagementGroup" type="text" id="ManagementGroup">
+                    </div>
+                </div>
+                <div class="row row--demo">
+                    <div class="columns four">
+                        <label class="label-checkbox">
+                            <input name="DepartmentGroupAccess" type="checkbox" id="DepartmentGroupAccess" value="true"/>Department Plus Access
+                        </label>
+                    </div>
+                    <div class="columns eight">
+                        Department # from Department Hierarchy
+                        <input class="text-input" name="DepartmentNum" type="text" id="DepartmentNum">
+                    </div>
+                </div>
+
+
+
+
+
+                <p>Notes</p>
+                <ul>
+                    <li>Management Group - Provides the HBS HR Admin access to a single management group.</li>
+                    <li>Department Plus - Provides the HBS HR Admin access to all 'child' management groups under the 'parent' department code.</li>
+                </ul>
+
+
+                <p>&nbsp;</p>
+            </div>
+
+            <div id="C" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>C. Replace Management Group Owner</b></div>
+                </div>
+                <div class="row row--demo">
+                    <div class="columns six">New Management Group Owner's Name</div>
+                    <div class="columns six">Employee ID #</div>
+                </div>
+                <div class="row row--demo">
+                    <div class="columns six">
+                        <input class="text-input" name="managementGroupName" type="text" id="managementGroupName">
+                    </div>
+                    <div class="columns six">
+                        <input class="text-input" name="managementEmployeeID" type="text" id="managementEmployeeID">
+                    </div>
+                </div>
+                <p>&nbsp;</p>
+            </div>
+
+            <div id="D" style="display:none;">
+                <div class="row row--demo">
+                    <div class="columns twelve"><b>D. Change to Employee's Reports Role</b></div>
+                </div>
+                <div class="row row--demo">
+                    <div class="columns four">Request</div>
+                    <div class="columns eight">Department Number</div>
+                </div>
+                <div class="row row--demo">
+                    <div class="columns four">
+                        <select name="reportsRole" id="reportsRole">
+                            <option value="">-select-</option>
+                            <option value="Allow">Allow Reports Role</option>
+                            <option value="Remove">Remove Reports Role</option>
+                        </select>
+                    </div>
+                    <div class="columns eight"><input class="text-input" type="text" name="roleDepartmentNumber" id="roleDepartmentNumber"></div>
+                </div>
+            </div>
+
+            <div class="row row--demo">
+                <div class="columns twelve"><b>Comments</b></div>
+                <div class="columns twelve">
+                    <textarea name="comments" cols="5" rows="5" id="comments"></textarea>
+                </div>
+            </div>
+
+            <p>CERTIFICATION: Submission of this form serves as your electronic signature. It certifies that the request aligns with policy and has been appropriately approved by the employee in accordance with departmental procedures. </p>
+            <p>&nbsp;</p>
+            <p>
+                <input name="validate" type="hidden" id="validate" value="true">
+            <div align="center"><input class="btn btn--primary btn--fix" type="submit" name="Submit" value="Submit Form"> </div>
+            </p>
+        </form>
+        <p>&nbsp;</p>
+    </div>
+    <?php
+} else {
+    echo "<pre>";
+    echo "<h2>Email Sent</h2>\n";
+    echo "From: " . $mailFrom . "\n";
+    echo "To: " . $mailTo . "\n";
+    echo "Subject: " . $subject . "\n";
+    echo "_______________________ \n";
+    echo $detail;
+    echo "</pre>";
+}
+
+include 'include/footer.php';
+?>
+                
+
+
+
+
+
+
+
+
