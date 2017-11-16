@@ -136,9 +136,9 @@ include 'include/header.php'
                 If you are currently attempting to use the UCSF VPN system and are having problems connecting to a site or network resource please contact your local CSC, computer administrator or the ITS Help Desk and provide them the information found in this box. 
             </div>
         <?php } ?>
-        <p>&nbsp</p>
-        <p>&nbsp</p>
-        <p>&nbsp</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
     </div>
     <?php
     include 'include/footer.php'
