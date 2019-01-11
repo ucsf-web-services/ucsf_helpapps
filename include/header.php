@@ -7,7 +7,7 @@
 	    <link type="text/css" rel="stylesheet" href="css/ie89.css" />
         <![endif]-->
     </head>
-    <body  class="wrapper">
+    <body class="wrapper <?php echo $bodyClass ?>">
         <!-- start banner -->
         <div id="ucsf-banner-nav" class="no-logo">
             <div class="top-header-container row">

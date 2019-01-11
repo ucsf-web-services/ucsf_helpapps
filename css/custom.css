@@ -1,3 +1,16 @@
+html {
+  font-family: 'HelveticaNeueLTStd-Roman', 'HelveticaNeueLTStd', Helvetica, Arial, sans-serif;
+
+}
+.heading_info p, .status p  {
+  font-size: 1.2em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+h1, h2 {
+  font-family: 'HelveticaNeueLTStd-Roman', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .wrapper{
   background-color: #B3B9BF;
 }
@@ -7,7 +20,7 @@
   max-width: 1230px;
   margin: 0 auto;
   padding-left:15px;
-  font-family: 'HelveticaNeueLTStd',arial, sans-serif;
+  font-family: 'HelveticaNeueLTStd', Helvetica, Arial, sans-serif;
   padding-right:15px;
 
 }
@@ -16,7 +29,7 @@
   width:100%;
   background-color: #000000;
   color:#ffffff;
-  font-family: 'HelveticaNeueLTStd',arial, sans-serif;
+  font-family: 'HelveticaNeueLTStd',Helveticam, Arial, sans-serif;
   clear:both;
   max-width: 1230px;
   margin: 0 auto;
@@ -26,7 +39,7 @@
 .top-header-container{
   max-width:1230px;
   margin: 0 auto;
-  font-family:HelveticaNeueLTStd-Roman, arial, san-serif;
+  font-family: HelveticaNeueLTStd-Roman, Arial, sans-serif;
 }
 
 .nav-bar .brand-logo {
@@ -59,11 +72,15 @@
 .ipnetverify {
   border-collapse: collapse;
   margin: 1em 0em;
-  font-size: 1.33em;
+  font-size: 1.25em;
 }
 .ipnetverify td, .ipnetverify th {
   border-top: 1px solid #D1D3D3;
   padding: 1em;
+}
+.status h3 {
+  font-size: 1.5em;
+  border-bottom: 1px solid #D1D3D3;
 }
 p {
   margin: .5em 0em;

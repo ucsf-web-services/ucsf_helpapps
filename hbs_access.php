@@ -127,7 +127,7 @@ if (($validate !== FALSE) && ($requesterType !== "--select one--")) {
         echo 'Mailer error: ' . $mail->ErrorInfo;
     }
 }
-
+$bodyClass = '';
 include 'include/header.php';
 ?>
 <title>HBS Access</title>

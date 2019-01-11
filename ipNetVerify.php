@@ -105,32 +105,35 @@ if (substr($ip, 0, 8) === "169.230.") {
         $networkLocation = "UCSF Mission Bay Campus Network";
     }
 }
-
+$bodyClass = ' ipnetverifypage';
 include 'include/header.php';
-// $release_level = "3";
+//$release_level = "3";
 ?>
+
 <title>Ip Verify</title>
 <div class="row row--demo">
     <div class="columns three">
         <h4><a href="index.php">UCSF Help Applications</a></h4>
     </div>
     <div class="columns six">
+      <div class="heading_info">
         <h2>Network Verification</h2>
         <p>This page tests whether you are on the UCSF network.</p>
         <p>If you are having problems connecting to a website or network resource please contact the <a href="http://help.ucsf.edu" target="_blank">IT Service Desk</a> at 415-514-4100 and provide them the information above.</p>
-
+        <p>&nbsp;</p>
+      </div>
 
         <?php if ($release_level === "3") { ?>
-          <div class="ui-alert ui-alert--success">
-            <h3> <em>Yes</em>, you are on the UCSF computing network.</h3>
-            <p>You appear to be connecting from the IP address of: <strong><?php echo($ip); ?></strong></p>
-            <p>From this UCSF computing resources identify you as being connected from: <strong><?php echo($networkLocation); ?></strong></p>
+          <div class="status">
+            <h3 class="okay"><strong> <em>Yes</em>, you are on the UCSF computing network.</strong></h3>
+            <p>This UCSF network resource identified you as being connected <br />from: <strong><?php echo($networkLocation); ?></strong></p>
           </div>
         <?php } else { ?>
-          <div class="ui-alert ui-alert--error">
-              <h4><em>No</em>, you are not on the UCSF computing network.</h4>
-              <p>You look to be connecting from the IP address of: <strong><?php echo($ip); ?></strong></p>
-            <p>This shows either that you are not on the UCSF network, you are not using one of the UCSF <abbr title="Virtual Private Network">VPN</abbr> services or your <abbr title="Virtual Private Network">VPN</abbr> client is not working correctly. Web sites and computing resources that require you to be on the UCSF network will not currently allow you access.</p>
+          <div class="status">
+            <h3 class="error"><strong><em>No</em>, you are not on the UCSF computing network.</strong></h3>
+            <p>This shows either that you are not on the UCSF network, you are not using one of the UCSF
+              <abbr title="Virtual Private Network">VPN</abbr> services or your <abbr title="Virtual Private Network">VPN</abbr>
+              client is not working correctly. Web sites and computing resources that require you to be on the UCSF network will not allow you access.</p>
           </div>
         <?php } ?>
 

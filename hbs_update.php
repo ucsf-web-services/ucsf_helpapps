@@ -183,7 +183,7 @@ if ($validate !== FALSE) {
         echo 'Mailer error: ' . $mail->ErrorInfo;
     }
 }
-
+$bodyClass = '';
 include 'include/header.php'
 ?>
 
