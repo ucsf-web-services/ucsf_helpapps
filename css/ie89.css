@@ -1,0 +1,51 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 11, 2015, 3:13:26 PM
+    Author     : scheung2
+*/
+
+.row row--demo {
+    
+}
+
+/*.columns {
+    display: inline-block;
+    float: left;
+    width: 40%;
+    margin: 2px;
+}*/
+
+#four {
+    width: 24%;
+    margin: 1px;
+    display: inline-block;
+}
+
+#one {
+    width: 99%;
+    margin: 1px;
+    display: inline-block;
+}
+
+#three {
+    width: 32%;
+    margin: 1px;
+    display: inline-block;
+}
+
+#two {
+    width: 49%;
+    margin: 1px;
+    display: inline-block;
+}
+
+#six {
+    width: 15%;
+    margin: 1px;
+    display: inline-block;
+}
+

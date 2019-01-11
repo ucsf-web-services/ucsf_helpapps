@@ -1,0 +1,76 @@
+.wrapper{
+  background-color: #B3B9BF;
+}
+.white-container {
+  background-color: #FFFFFF;
+  display: block;
+  max-width: 1230px;
+  margin: 0 auto;
+  padding-left:15px;
+  font-family: 'HelveticaNeueLTStd',arial, sans-serif;
+  padding-right:15px;
+
+}
+.footer{
+  position: relative;
+  width:100%;
+  background-color: #000000;
+  color:#ffffff;
+  font-family: 'HelveticaNeueLTStd',arial, sans-serif;
+  clear:both;
+  max-width: 1230px;
+  margin: 0 auto;
+  padding-left:30px;
+}
+
+.top-header-container{
+  max-width:1230px;
+  margin: 0 auto;
+  font-family:HelveticaNeueLTStd-Roman, arial, san-serif;
+}
+
+.nav-bar .brand-logo {
+  box-shadow: none;
+}
+
+.nav-bar {
+  border-bottom: 1px #fff solid;
+}
+
+.text-input, textarea {
+  padding: .3em 0em;
+}
+
+.hide {
+  display: none;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.ui-alert--error {
+  background: #EB093C;
+}
+
+.ui-alert--success {
+  background: #052049;
+}
+.ipnetverify {
+  border-collapse: collapse;
+  margin: 1em 0em;
+  font-size: 1.33em;
+}
+.ipnetverify td, .ipnetverify th {
+  border-top: 1px solid #D1D3D3;
+  padding: 1em;
+}
+p {
+  margin: .5em 0em;
+}
+.error {
+  color: red;
+}
+.okay {
+  color: darkgreen;
+}
