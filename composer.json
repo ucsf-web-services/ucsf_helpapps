@@ -1,0 +1,6 @@
+{
+        "require": {
+                "phpmailer/phpmailer": "dev-master",
+                "whichbrowser/parser": "^2.0"
+        }
+}
