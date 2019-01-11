@@ -1,5 +1,29 @@
 <?php
 require_once 'vendor/autoload.php';
+include 'include/analyticstracking.php';
+
+$privileged_networks = array();
+$privileged_networks[] = "10."; //RFC 1918
+$privileged_networks[] = "64.54."; //UCSF
+$privileged_networks[] = "128.218."; //UCSF
+$privileged_networks[] = "169.230."; //VPN
+$privileged_networks[] = "192.168."; //RFC 1918
+//$privileged_networks[] = "127.0.0.1"; //Localhost
+$allowed = FALSE;
+
+foreach ($privileged_networks as $network) {
+    if (strpos($_SERVER['REMOTE_ADDR'], "$network") === 0) {
+        $allowed = TRUE;
+        break;
+    }
+}
+if (!$allowed) {
+    header('HTTP/1.0 403 Forbidden');
+    die('Access denied (HTTP 403). Please login to VPN.' . " <a href='ipNetVerify.php'>Verify VPN Access Here</a>");    
+}
+
+
+
 if (!empty($_POST['EmailAddress'])) {
 
     $config = parse_ini_file("conf/config.ini");
@@ -11,11 +35,13 @@ if (!empty($_POST['EmailAddress'])) {
         $matches[0] = '';
     }
 
-    $filter = '(mail=' . $matches[0] . ')';
+    $filter = 'mail=' . escapeString($matches[0]);
 
     $ldapconn = ldap_connect($config['LDAP host'], $config['Port'])
             or die('did not connect');
 
+    ldap_set_option($cnx, LDAP_OPT_PROTOCOL_VERSION, 3);
+    
     $ldapbind = ldap_bind($ldapconn, $config['Bind DN'], $config['Bind password'])
             or die('did not bind');
 
@@ -26,11 +52,23 @@ if (!empty($_POST['EmailAddress'])) {
     ldap_close($ldapconn);
 }
 
+function escapeString($string) {
+    # Backslash must be listed first, since otherwise it would replace the
+    # backslashes used in other replacements
+    $chars = array(
+     "\x00" => '\00',
+     '\\' => '\5c',
+     '(' => '\28',
+     ')' => '\29',
+     '*' => '\2A');
+    return str_replace(array_keys($chars), array_values($chars), $string);
+}
+
 include 'include/header.php';
 ?>
-
+<title>Email Helper</title>
 <div class="row row--demo">
-    <div class="columns three"> </div>
+    <div class="columns three"> <a href="index.php"><h4>UCSF Help Applications</h4></a></div>
     <div class="columns six">
 
         <form action="" method="post" name="EmailHelperForm">

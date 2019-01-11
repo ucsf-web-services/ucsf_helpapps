@@ -1,5 +1,4 @@
 <?php
-include 'include/analyticstracking.php';
 require __DIR__ . '/vendor/autoload.php';
 
 $release_level = "1";

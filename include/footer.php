@@ -6,18 +6,16 @@
  * and open the template in the editor.
  */
 ?>
-
-
-
             <!-- /Content-->
             <!-- Start Footer -->
             <div class="footer">
                 <footer>
-                    &copy; 2015 University of California Regents, All Rights Reserved.
+                    &copy; 2019 University of California Regents, All Rights Reserved.
                 </footer>
             </div>
             <!-- End Footer -->
         </div>
         <!-- end of container -->
     </body>
+  <?php include "include/analyticstracking.php"; ?>
 </html>
