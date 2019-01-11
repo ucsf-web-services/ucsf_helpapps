@@ -13,9 +13,11 @@ include 'include/header.php';
         <h2>UCSF Help Applications</h2>
         <table class="table table--bordered">
             <tbody>
+            <!--
                 <tr>
                     <td><a href="EmailHelper.php"><div>Retrieve User ID</div></a></td>
                 </tr>
+            -->
                 <tr>
                     <td><a href="hbs_access.php"><div>Request HBS Access</div></a></td>
                 </tr>
