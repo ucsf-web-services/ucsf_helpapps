@@ -32,7 +32,7 @@ $subnet = substr($ip, 8);
 
 if (substr($ip, 0, 3) === "10.") {
     $release_level = "3";
-    $networkLocation = "UCSF Network- Private Space";
+    $networkLocation = "UCSF Network - Private Space";
 }
 
 if (substr($ip, 0, 6) === "64.54.") {
@@ -119,7 +119,7 @@ include 'include/header.php';
       <div class="heading_info">
         <h2>Network Verification</h2>
         <p>This page tests whether you are on the UCSF network.</p>
-        <p>If you are having problems connecting to a website or network resource please contact the <a href="http://help.ucsf.edu" target="_blank">IT Service Desk</a> at 415-514-4100 and provide them the information above.</p>
+        <p>If you are having problems connecting to a website or network resource please contact the <a href="http://help.ucsf.edu" target="_blank">IT Service Desk</a> at 415-514-4100 and provide them the information below.</p>
         <p>&nbsp;</p>
       </div>
 
@@ -210,7 +210,11 @@ include 'include/header.php';
                   }
                   document.getElementById("plugins").innerHTML=txt;
                 </script>
-              </strong></td>
+              </strong>
+              <noscript>
+              Plugin detection unavailable.
+              </noscript>
+              </td>
           </tr>
           <tr>
             <td>Device</td><td>
@@ -229,6 +233,9 @@ include 'include/header.php';
               document.write(window.screen.width + 'px X ' + window.screen.height + 'px' );
             </script>
               </strong>
+               <noscript>
+              Screen size unavailable.
+              </noscript>
             </td>
           </tr>
 
